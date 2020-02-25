@@ -27,6 +27,19 @@ create table SYS_USER_ROLE
 )
     comment '用户角色表';
 
+drop table if exists GRADE_CLASS;
+create table GRADE_CLASS
+(
+    id_ bigint auto_increment,
+    name_ varchar(255) null,
+    description_ text null,
+    constraint GRADE_CLASS_pk
+        primary key (id_)
+)
+    comment '班级';
+
+
+
 insert into SYS_USER(name_, login_name_, password_)
 VALUES ('管理员', 'admin', '$2a$10$C5Gf4PUSLh2vjiiF1MsOFOuUjmFl7cdAbTHtMILfX.B0dPCj6aH3q');
 insert into SYS_USER_ROLE(sys_user_id_, role_)

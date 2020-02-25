@@ -16,7 +16,7 @@ public interface SysUserRepository {
      * @return
      */
     @Select("SELECT * FROM SYS_USER WHERE id_=#{id}")
-    @ResultMap("com.longder.car.repository.SysUserRepository.SysUserResultMap")
+    @ResultMap("com.longder.edusys.repository.SysUserRepository.SysUserResultMap")
     SysUser getOne(Long id);
 
     /**
@@ -34,7 +34,7 @@ public interface SysUserRepository {
      * @return
      */
     @Select("SELECT * FROM SYS_USER WHERE login_name_=#{loginName}")
-    @ResultMap("com.longder.car.repository.SysUserRepository.SysUserResultMap")
+    @ResultMap("com.longder.edusys.repository.SysUserRepository.SysUserResultMap")
     SysUser getByLoginName(String loginName);
 
     /**
@@ -42,7 +42,7 @@ public interface SysUserRepository {
      * @return
      */
     @Select("SELECT U.* FROM SYS_USER U LEFT JOIN SYS_USER_ROLE UR on U.id_ = UR.sys_user_id_ WHERE UR.role_ = 'ROLE_USER'")
-    @ResultMap("com.longder.car.repository.SysUserRepository.SysUserResultMap")
+    @ResultMap("com.longder.edusys.repository.SysUserRepository.SysUserResultMap")
     List<SysUser> listCommonUser();
 
     /**

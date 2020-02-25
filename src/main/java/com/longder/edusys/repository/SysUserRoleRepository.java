@@ -12,7 +12,7 @@ import java.util.List;
 public interface SysUserRoleRepository {
 
     @Select("SELECT * FROM SYS_USER_ROLE WHERE sys_user_id_ = #{sysUserId}")
-    @ResultMap("com.longder.car.repository.SysUserRoleRepository.SysUserRoleResultMap")
+    @ResultMap("com.longder.edusys.repository.SysUserRoleRepository.SysUserRoleResultMap")
     List<SysUserRole> listBySysUserId(Long sysUserId);
 
     @Insert("INSERT INTO SYS_USER_ROLE(sys_user_id_,role_) VALUES(#{sysUserId},#{sysRole})")

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longder.edusys.repository.GradeClassRepository">
+    <resultMap id="GradeClassResultMap" type="com.longder.edusys.entity.po.GradeClass">
+        <id column="id_" property="id"/>
+        <result column="name_" property="name"/>
+        <result column="description_" property="description"/>
+    </resultMap>
+</mapper>

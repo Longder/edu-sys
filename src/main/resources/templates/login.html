@@ -49,7 +49,10 @@
                 <label class="checkbox-inline i-checks">
                     <input name="role" type="radio" value="ROLE_TEACHER">教师</label>
             </div>
-<!--            <span class="text-danger" th:text="${SPRING_SECURITY_LAST_EXCEPTION.message}"></span>-->
+            <span class="text-danger" th:if="${session[SPRING_SECURITY_LAST_EXCEPTION]!=null}"
+                th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}">
+                Error Message
+            </span>
             <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
             <p class="text-muted text-center">
                 <a th:href="@{/toRegister}">注册一个新账号</a>
