@@ -38,6 +38,20 @@ create table GRADE_CLASS
 )
     comment '班级';
 
+drop table if exists exam;
+create table exam
+(
+	id_ bigint auto_increment,
+	name_ varchar(255) null,
+	hours_ int null,
+	minutes_ int null,
+	grade_class_id_ bigint null,
+	constraint exam_pk
+		primary key (id_)
+)
+    comment '考试';
+
+
 
 
 insert into SYS_USER(name_, login_name_, password_)

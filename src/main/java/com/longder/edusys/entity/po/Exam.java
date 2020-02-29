@@ -17,7 +17,7 @@ public class Exam extends BaseIdEntity{
     /**
      * 关联班级
      */
-    private Long gradeClassId;
+    private GradeClass gradeClass;
     /**
      * 小时数（考试时间）
      */

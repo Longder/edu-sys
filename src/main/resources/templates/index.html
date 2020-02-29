@@ -28,9 +28,33 @@
                     </div>
                 </li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="J_menuItem" th:href="@{/admin/user/list}" title="用户管理">
+                    <a class="J_menuItem" th:href="@{/admin/class/list}" title="班级管理">
                         <i class="fa fa-users"></i>
-                        <span class="nav-label">用户管理</span>
+                        <span class="nav-label">班级管理</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="J_menuItem" th:href="@{/admin/teacher/list}" title="教师管理">
+                        <i class="fa fa-users"></i>
+                        <span class="nav-label">教师管理</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="J_menuItem" th:href="@{/admin/user/list}" title="学生管理">
+                        <i class="fa fa-users"></i>
+                        <span class="nav-label">学生管理</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="J_menuItem" th:href="@{/admin/user/list}" title="学科章节管理">
+                        <i class="fa fa-users"></i>
+                        <span class="nav-label">学科章节管理</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_ADMIN')">
+                    <a class="J_menuItem" th:href="@{/admin/user/list}" title="习题管理">
+                        <i class="fa fa-users"></i>
+                        <span class="nav-label">习题管理</span>
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_USER')">
