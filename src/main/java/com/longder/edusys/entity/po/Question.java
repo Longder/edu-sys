@@ -33,6 +33,11 @@ public class Question extends BaseIdEntity{
     private Long chapterId;
 
     /**
+     * 所属章节
+     */
+    private Chapter chapter;
+
+    /**
      * 答案
      */
     private String answer;

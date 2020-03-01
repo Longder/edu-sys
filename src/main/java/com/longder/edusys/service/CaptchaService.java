@@ -12,4 +12,10 @@ public interface CaptchaService {
      * @return
      */
     Captcha createCaptcha();
+
+    /**
+     * 校验验证码
+     * @return
+     */
+    Boolean checkCaptchaCode(String valid,String source);
 }

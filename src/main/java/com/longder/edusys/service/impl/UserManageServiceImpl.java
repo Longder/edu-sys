@@ -37,6 +37,8 @@ public class UserManageServiceImpl implements UserManageService {
         if(ObjectUtils.isEmpty(sysUser.getId())){//空的 新增
             //处理下密码
             sysUser.setPassword(EncryptionUtil.encrypt(sysUser.getPassword().trim()));
+            //默认是有效的
+            sysUser.setActive(true);
             sysUserRepository.insert(sysUser);
             SysUserRole userRole = new SysUserRole(sysUser.getId(),role);
             sysUserRoleRepository.insert(userRole);

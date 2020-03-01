@@ -7,6 +7,10 @@ import org.apache.ibatis.annotations.ResultMap;
 import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
+
+/**
+ * 考试表Dao
+ */
 @Repository
 public interface ExamRepository {
 

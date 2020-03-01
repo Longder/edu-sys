@@ -7,7 +7,7 @@
     <div class="col-sm-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>班级列表</h5>
+                <h5>教师列表</h5>
                 <div class="ibox-tools">
                     <a class="collapse-link">
                         <i class="fa fa-chevron-up"></i>
@@ -23,15 +23,8 @@
             <div class="ibox-content">
                 <div class="row">
                     <div class="col-sm-3">
-                        <span class="input-group-btn">
-                        <input type="button" class="btn btn-success" data-toggle="modal"
-                               data-target="#classModal"
-                               onclick="openModal('/admin/class/toAdd','classModal')"
-                               value="添加班级"/>
-                        </span>
                     </div>
                     <div class="col-sm-9">
-
                     </div>
                 </div>
                 <div class="table table-bordered table-hover">
@@ -39,20 +32,26 @@
                         <thead>
                         <tr>
                             <th>序号</th>
-                            <th>班级名称</th>
-                            <th>班级描述</th>
+                            <th>登录名</th>
+                            <th>姓名</th>
+                            <th>邮箱</th>
+                            <th>所在班级</th>
                             <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="class:${list}">
-                            <td th:text="${classStat.index+1}"></td>
-                            <td th:text="${class.name}"></td>
-                            <td th:text="${class.description}"></td>
+                        <tr th:each="teacher:${teacherList}">
+                            <td th:text="${teacherStat.index+1}"></td>
+                            <td th:text="${teacher.loginName}"></td>
+                            <td th:text="${teacher.name}"></td>
+                            <td th:text="${teacher.email}"></td>
+                            <td th:text="${teacher.gradeClass.name}"></td>
                             <td>
-                                <a href="#" class="btn btn-sm btn-danger">
-                                    操作
-                                </a>
+                                <button data-toggle="modal" class="btn btn-sm btn-warning"
+                                        data-target="#teacherModal"
+                                        th:onclick="'openModal(\'/admin/teacher/toEdit?teacherId='+${teacher.id}+'\',\'teacherModal\')'">
+                                    编辑
+                                </button>
                             </td>
                         </tr>
                         </tbody>
@@ -62,7 +61,7 @@
         </div>
     </div>
 </div>
-<div class="modal inmodal fade" id="classModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
+<div class="modal inmodal fade" id="teacherModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <!--引入统一JS-->
 <script th:replace="import/script :: script"></script>
 </body>

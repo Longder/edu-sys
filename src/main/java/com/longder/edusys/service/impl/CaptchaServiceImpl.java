@@ -24,4 +24,20 @@ public class CaptchaServiceImpl implements CaptchaService {
         BufferedImage image = captchaProducer.createImage(capText);
         return new Captcha(capText,image);
     }
+
+    /**
+     * 校验验证码
+     *
+     * @param valid 待校验
+     * @param source 原验证码
+     * @return true 验证通过 false 验证不通过
+     */
+    @Override
+    public Boolean checkCaptchaCode(String valid, String source) {
+        boolean flag = false;
+        if(valid!=null){
+            flag = source.equalsIgnoreCase(valid.trim());
+        }
+        return flag;
+    }
 }

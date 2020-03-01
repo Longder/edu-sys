@@ -39,7 +39,7 @@
                 <img id="captcha" th:src="@{/getCaptcha}" title="看不清，换一张" style="cursor: pointer"/>
             </div>
             <div class="form-group">
-                <input type="text" class="form-control" placeholder="验证码" name="captcha">
+                <input type="text" class="form-control" placeholder="验证码" name="validCode">
             </div>
             <div class="form-group">
                 <label class="checkbox-inline i-checks">
@@ -70,6 +70,27 @@
 <script th:src="@{/static/js/plugins/validate/jquery.validate.min.js}"></script>
 <script th:src="@{/static/js/plugins/validate/messages_zh.min.js}"></script>
 <script type="text/javascript">
+
+    //自定义验证码验证
+    jQuery.validator.addMethod("checkCode", function (value, element) {
+        var flag = false;
+        $.ajax({
+            type: "post",
+            url: "/checkCode",
+            data: {code: value},
+            async: false,
+            success: function (data) {
+                if (data === false) {
+                    flag = false;
+                } else {
+                    flag = true;
+                }
+            }
+        });
+        return flag;
+    }, "验证码错误");
+
+
     $(function(){
         //iCHeck使能
         $('.i-checks').iCheck({
@@ -82,12 +103,19 @@
             rules:{
                 username:"required",
                 password:"required",
-                captcha:"required",
+                validCode:{
+                    required:true,
+                    checkCode:true
+                },
             },messages:{
                 username:"请输入用户名",
                 password:"请输入密码",
-                captcha:"请输入验证码"
-            }
+                validCode:{
+                    required:"请输入验证码",
+                    checkCode:"验证码输入错误"
+                }
+            },
+            onfocusout:false
         });
 
         //验证码刷新

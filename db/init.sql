@@ -11,6 +11,7 @@ create table SYS_USER
     password_   varchar(100) null comment '密码',
     email_     varchar(100)  null comment '邮箱',
     active_     bit          null comment '有效性',
+    grade_class_id_     bigint          null comment '关联班级id',
         constraint SYS_USER_pk
         primary key (id_)
 )
@@ -38,8 +39,8 @@ create table GRADE_CLASS
 )
     comment '班级';
 
-drop table if exists exam;
-create table exam
+drop table if exists EXAM;
+create table EXAM
 (
 	id_ bigint auto_increment,
 	name_ varchar(255) null,
@@ -52,9 +53,41 @@ create table exam
     comment '考试';
 
 
+drop table if exists CHAPTER;
+create table CHAPTER
+(
+    id_ bigint auto_increment,
+    subject_ varchar(255),
+    name_ varchar(255),
+    title_ varchar(255),
+    content_ varchar(255),
+    study_plan_ varchar(255),
+        primary key (id_)
+)
+    comment '学科章节';
 
 
-insert into SYS_USER(name_, login_name_, password_)
-VALUES ('管理员', 'admin', '$2a$10$C5Gf4PUSLh2vjiiF1MsOFOuUjmFl7cdAbTHtMILfX.B0dPCj6aH3q');
+drop table if exists QUESTION;
+create table QUESTION
+(
+    id_ BIGINT auto_increment comment '主键',
+    content_ text null comment '题目内容',
+    type_ varchar(100) null,
+    score_ decimal null comment '分数',
+    answer_ varchar(100) null,
+    chapter_id_ bigint comment '试题所属章节',
+    choice_A_ varchar(100),
+    choice_B_ varchar(100),
+    choice_C_ varchar(100),
+    choice_D_ varchar(100),
+    constraint QUESTION_pk
+        primary key (id_)
+)
+    comment '题目';
+
+
+
+insert into SYS_USER(name_, login_name_, password_,active_)
+VALUES ('管理员', 'admin', '$2a$10$C5Gf4PUSLh2vjiiF1MsOFOuUjmFl7cdAbTHtMILfX.B0dPCj6aH3q',1);
 insert into SYS_USER_ROLE(sys_user_id_, role_)
 values (1, 'ROLE_ADMIN');

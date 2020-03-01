@@ -17,7 +17,7 @@
 
 <body class="gray-bg">
 
-<div class="middle-box loginscreen   animated fadeInDown">
+<div class="middle-box loginscreen   animated fadeInDown" style="margin-top: 0">
     <div>
         <div class="text-center">
             <h1 class="logo-name">益+</h1>
@@ -30,11 +30,11 @@
             </div>
             <div class="form-group">
                 <label>密码</label>
-                <input name="password" type="password" class="form-control" placeholder="请输入密码">
+                <input id="password" name="password" type="password" class="form-control" placeholder="请输入密码">
             </div>
             <div class="form-group">
                 <label>确认密码</label>
-                <input type="password" class="form-control" placeholder="请再次输入密码">
+                <input type="password" class="form-control" placeholder="请再次输入密码" name="passwordAgain">
             </div>
             <div class="form-group">
                 <label>真实姓名</label>
@@ -55,9 +55,8 @@
             </div>
             <div class="form-group">
                 <label>班级</label>
-                <select class="form-control">
-                    <option>班级一</option>
-                    <option>班级二</option>
+                <select name="gradeClass.id" class="form-control">
+                    <option th:each="class:${classList}" th:value="${class.id}" th:text="${class.name}"></option>
                 </select>
             </div>
             <div class="form-group row">
@@ -66,7 +65,7 @@
                     <img id="captcha" width="100" height="30" th:src="@{/getCaptcha}" title="看不清，换一张" style="cursor: pointer"/>
                 </div>
                 <div class="col-sm-5">
-                    <input name="captcha" type="text" class="form-control" placeholder="验证码"/>
+                    <input name="validCode" type="text" class="form-control" placeholder="验证码"/>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary block full-width m-b">注 册</button>
@@ -96,7 +95,7 @@
             data: {loginName: value},
             async: false,
             success: function (data) {
-                if (data == false) {
+                if (data === false) {
                     flag = false;
                 } else {
                     flag = true;
@@ -105,6 +104,25 @@
         });
         return flag;
     }, "用户名已存在");
+
+    //自定义验证码验证
+    jQuery.validator.addMethod("checkCode", function (value, element) {
+        var flag = false;
+        $.ajax({
+            type: "post",
+            url: "/checkCode",
+            data: {code: value},
+            async: false,
+            success: function (data) {
+                if (data === false) {
+                    flag = false;
+                } else {
+                    flag = true;
+                }
+            }
+        });
+        return flag;
+    }, "验证码错误");
 
     $(function () {
         //iCheck使能
@@ -122,16 +140,41 @@
                     "checkLoginName":true
                 },
                 phone:"required",
-                password:"required"
+                password:"required",
+                passwordAgain:{
+                    required:true,
+                    equalTo:"#password"
+                },
+                email:{
+                    required:true,
+                    email:true
+                },
+                validCode:{
+                    required:true,
+                    checkCode:true
+                }
             },messages:{
-                name:"请输入姓名",
+                name:"请输入真实姓名",
                 loginName:{
                     "required":"请输入登录名",
                     "checkLoginName":"登录名已存在"
                 },
                 phone:"情输入联系电话",
-                password:"请输入密码"
-            }
+                password:"请输入密码",
+                passwordAgain:{
+                    required:"请确认密码",
+                    equalTo:"两次输入的密码不同"
+                },
+                email:{
+                    required:"请输入邮箱",
+                    email:"邮箱格式不正确"
+                },
+                validCode:{
+                    required:"请输入验证码",
+                    checkCode:"验证码输入有误"
+                }
+            },
+            onfocusout:false
         });
 
         $('.i-checks').iCheck({

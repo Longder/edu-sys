@@ -9,6 +9,9 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * 班级表Dao
+ */
 @Repository
 public interface GradeClassRepository {
 

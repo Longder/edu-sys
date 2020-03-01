@@ -22,9 +22,7 @@ public class ExamRepositoryTest extends BaseTest {
         exam.setMinutes(30);
         GradeClass gradeClass = gradeClassRepository.getOne(1L);
         exam.setGradeClass(gradeClass);
-
         examRepository.insert(exam);
-
     }
 
     @Test

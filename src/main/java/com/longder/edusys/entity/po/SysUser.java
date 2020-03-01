@@ -45,6 +45,16 @@ public class SysUser extends BaseIdEntity implements UserDetails {
      */
     private List<SysUserRole> roles;
 
+    /**
+     * 用户当前角色，不持久化。传递用
+     */
+    private SysRole role;
+
+    /**
+     * 所属班级，学生，教师用户有
+     */
+    private GradeClass gradeClass;
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

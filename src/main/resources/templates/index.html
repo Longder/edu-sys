@@ -29,38 +29,44 @@
                 </li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="J_menuItem" th:href="@{/admin/class/list}" title="班级管理">
-                        <i class="fa fa-users"></i>
+                        <i class="fa fa-commenting"></i>
                         <span class="nav-label">班级管理</span>
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="J_menuItem" th:href="@{/admin/teacher/list}" title="教师管理">
-                        <i class="fa fa-users"></i>
+                        <i class="fa fa-male"></i>
                         <span class="nav-label">教师管理</span>
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="J_menuItem" th:href="@{/admin/user/list}" title="学生管理">
+                    <a class="J_menuItem" th:href="@{/admin/student/list}" title="学生管理">
                         <i class="fa fa-users"></i>
                         <span class="nav-label">学生管理</span>
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="J_menuItem" th:href="@{/admin/user/list}" title="学科章节管理">
-                        <i class="fa fa-users"></i>
+                    <a class="J_menuItem" th:href="@{/admin/chapter/list}" title="学科章节管理">
+                        <i class="fa fa-file-text-o"></i>
                         <span class="nav-label">学科章节管理</span>
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="J_menuItem" th:href="@{/admin/user/list}" title="习题管理">
-                        <i class="fa fa-users"></i>
+                    <a class="J_menuItem" th:href="@{/admin/question/list}" title="习题管理">
+                        <i class="fa fa-clone"></i>
                         <span class="nav-label">习题管理</span>
                     </a>
                 </li>
-                <li sec:authorize="hasRole('ROLE_USER')">
-                    <a class="J_menuItem" th:href="@{/admin/car/list}" title="我的车辆">
-                        <i class="fa fa-car"></i>
-                        <span class="nav-label">我的车辆</span>
+                <li sec:authorize="hasRole('ROLE_STUDENT')">
+                    <a class="J_menuItem" th:href="@{/admin/preLesson/listChapter}" title="章节预习">
+                        <i class="fa fa-feed"></i>
+                        <span class="nav-label">章节预习</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_STUDENT')">
+                    <a class="J_menuItem" th:href="@{/admin/selfExam/choose}" title="自我测验">
+                        <i class="fa fa-book"></i>
+                        <span class="nav-label">自我测验</span>
                     </a>
                 </li>
             </ul>
@@ -116,7 +122,7 @@
                     data-id="dashboard"></iframe>
         </div>
         <div class="footer">
-            <div class="pull-right">&copy; 2019 <a href="#" target="_blank">大表哥出品</a>
+            <div class="pull-right">&copy; 2019 <a href="#" target="_blank">有心人出品</a>
             </div>
         </div>
     </div>

@@ -35,4 +35,13 @@ public class Chapter extends BaseIdEntity{
      */
     private String studyPlan;
 
+    /**
+     * 学科-章节标题，不持久化，展示用
+     */
+    private String subjectTitle;
+
+    public void generateSubjectTitle(){
+        this.subjectTitle = this.subject +"-"+this.title;
+    }
+
 }

@@ -15,7 +15,9 @@ public interface SysUserRepository {
      * @param id
      * @return
      */
-    @Select("SELECT * FROM SYS_USER WHERE id_=#{id}")
+    @Select("SELECT s.id_ as user_id,s.name_ as user_name,s.login_name_,s.email_,s.active_,s.password_, " +
+            "       g.id_ as class_id,g.name_ as class_name,g.description_ " +
+            "FROM SYS_USER s left join GRADE_CLASS g on s.grade_class_id_ = g.id_ where s.id_=#{id}")
     @ResultMap("com.longder.edusys.repository.SysUserRepository.SysUserResultMap")
     SysUser getOne(Long id);
 
@@ -25,7 +27,7 @@ public interface SysUserRepository {
      * @return 受影响的条数
      */
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    @Insert("INSERT INTO SYS_USER(name_,login_name_,password_,gender_,active_,phone_) values(#{name},#{loginName},#{password},#{gender},#{active},#{phone})")
+    @Insert("INSERT INTO SYS_USER(name_,login_name_,password_,email_,active_,grade_class_id_) values(#{name},#{loginName},#{password},#{email},#{active},#{gradeClass.id})")
     void insert(SysUser sysUser);
 
     /**
@@ -33,7 +35,9 @@ public interface SysUserRepository {
      * @param loginName
      * @return
      */
-    @Select("SELECT * FROM SYS_USER WHERE login_name_=#{loginName}")
+    @Select("SELECT s.id_ as user_id,s.name_ as user_name,s.login_name_,s.email_,s.active_,s.password_, " +
+            "       g.id_ as class_id,g.name_ as class_name,g.description_ " +
+            "FROM SYS_USER s left join GRADE_CLASS g on s.grade_class_id_ = g.id_ where s.login_name_=#{loginName}")
     @ResultMap("com.longder.edusys.repository.SysUserRepository.SysUserResultMap")
     SysUser getByLoginName(String loginName);
 
@@ -54,8 +58,24 @@ public interface SysUserRepository {
 
     /**
      * 修改用户
+     * （目前只修改email和姓名）
      * @param sysUser
      */
-    @Update("UPDATE SYS_USER SET login_name_= #{loginName},name_ = #{name},password_ = #{password},gender_ = #{gender} WHERE id_ = #{id}")
+    @Update("UPDATE SYS_USER SET name_ = #{name},email_ = #{email} WHERE id_ = #{id}")
     void update(SysUser sysUser);
+
+    /**
+     * 根据角色查询
+     * @param role
+     * @return
+     */
+    @ResultMap("com.longder.edusys.repository.SysUserRepository.SysUserResultMap")
+    @Select("SELECT s.id_ as user_id,s.name_ as user_name,s.login_name_,s.email_,s.active_,s.password_," +
+            "       g.id_ as class_id,g.name_ as class_name,g.description_" +
+            "    FROM SYS_USER S " +
+            "    LEFT JOIN SYS_USER_ROLE SUR on S.id_ = SUR.id_ " +
+            "    LEFT JOIN GRADE_CLASS g on S.grade_class_id_ = g.id_ " +
+            "    WHERE SUR.role_ = #{role}")
+    List<SysUser> listByRole(String role);
+
 }

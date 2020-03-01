@@ -2,11 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.longder.edusys.repository.SysUserRepository">
     <resultMap id="SysUserResultMap" type="com.longder.edusys.entity.po.SysUser">
-        <id column="id_" property="id"/>
-        <result column="name_" property="name"/>
+        <id column="user_id" property="id"/>
+        <result column="user_name" property="name"/>
         <result column="login_name_" property="loginName"/>
         <result column="password_" property="password"/>
         <result column="email_" property="email"/>
         <result column="active_" property="active"/>
+        <association property="gradeClass" javaType="com.longder.edusys.entity.po.GradeClass">
+            <id property="id" column="class_id"/>
+            <result property="name" column="class_name"/>
+            <result property="description" column="description_"/>
+        </association>
     </resultMap>
 </mapper>
