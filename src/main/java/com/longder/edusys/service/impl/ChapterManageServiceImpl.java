@@ -26,7 +26,7 @@ public class ChapterManageServiceImpl implements ChapterManageService {
     @Override
     public List<Chapter> listAllChapter() {
         List<Chapter> chapterList = chapterRepository.listAll();
-        chapterList.forEach(chapter -> chapter.setSubjectTitle(chapter.getSubject()+"-"+chapter.getTitle()));
+        chapterList.forEach(Chapter::generateSubjectTitle);
         return chapterList;
     }
 

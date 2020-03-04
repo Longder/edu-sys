@@ -1,5 +1,6 @@
 package com.longder.edusys.entity.po;
 
+import com.longder.edusys.entity.enums.ExamType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -15,9 +16,14 @@ public class Exam extends BaseIdEntity{
      */
     private String name;
     /**
-     * 关联班级
+     * 关联班级(一定有)
      */
     private GradeClass gradeClass;
+
+    /**
+     * 关联学生（自测才有）
+     */
+    private SysUser student;
     /**
      * 小时数（考试时间）
      */
@@ -26,4 +32,11 @@ public class Exam extends BaseIdEntity{
      * 分钟数 (考试时间)
      */
     private Integer minutes;
+
+    /**
+     * 考试类型
+     */
+    private ExamType examType;
+
+
 }

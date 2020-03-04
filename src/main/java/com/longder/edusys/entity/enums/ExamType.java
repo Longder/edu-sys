@@ -3,12 +3,11 @@ package com.longder.edusys.entity.enums;
 import java.util.Arrays;
 
 /**
- * 题目类型枚举
- * Created by Longder
+ * 考试类型
  */
-public enum QuestionType {
-    FILL("FILL", "", "填空题"),
-    CHOICE("CHOICE", "", "选择题");
+public enum ExamType {
+    SELF("SELF", "", "自我测验"),
+    NORMAL("NORMAL", "", "正式考试");
 
 
     private String name;
@@ -18,15 +17,12 @@ public enum QuestionType {
     private String displayName;
 
 
-    QuestionType(String name, String label, String displayName) {
+    ExamType(String name, String label, String displayName) {
         this.name = name;
         this.label = label;
         this.displayName = displayName;
     }
 
-    public static QuestionType fromValue(String value) {
-        return Arrays.stream(QuestionType.values()).filter(type -> type.displayName.equals(value)).findFirst().orElse(null);
-    }
 
     public String getName() {
         return name;

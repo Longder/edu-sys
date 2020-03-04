@@ -22,14 +22,15 @@
                     </div>
                 </div>
                 <div class="ibox-content">
-                    <form class="form-horizontal">
+                    <form class="form-horizontal" method="post" th:action="@{/admin/exam/init}">
+                        <input type="hidden" value="SELF" name="examType"/>
                         <div class="form-group">
                             <label class="col-sm-2 control-label">自测方式：</label>
                             <div class="col-sm-10">
                                 <label class="checkbox-inline i-checks">
-                                    <input id="all-radio" name="exam-type" type="radio" value="ALL" checked>全章节随机</label>
+                                    <input id="all-radio" name="chooseWay" type="radio" value="ALL" checked>全章节随机</label>
                                 <label class="checkbox-inline i-checks">
-                                    <input id="assign-radio" name="exam-type" type="radio" value="ASSIGN">指定章节</label>
+                                    <input id="assign-radio" name="chooseWay" type="radio" value="ASSIGN">指定章节</label>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -38,19 +39,9 @@
                                 选择章节：
                             </label>
                             <div class="col-sm-10" style="padding-top: 10px;">
-                                <div class="i-checks">
+                                <div class="i-checks" th:each="chapter:${chapterList}">
                                     <label>
-                                        <input type="checkbox" value=""> <i></i> 高等数学-章节一
-                                    </label>
-                                </div>
-                                <div class="i-checks">
-                                    <label>
-                                        <input type="checkbox" value=""> <i></i> 高等数学-章节二
-                                    </label>
-                                </div>
-                                <div class="i-checks">
-                                    <label>
-                                        <input type="checkbox" value=""> <i></i> 高等数学-章节三
+                                        <input name="chapterIds" type="checkbox" th:value="${chapter.id}"> <i></i> <span th:text="${chapter.subjectTitle}"></span>
                                     </label>
                                 </div>
                             </div>
