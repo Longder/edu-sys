@@ -4,6 +4,7 @@ import com.longder.edusys.security.CustomerUserDetailsService;
 import com.longder.edusys.security.FormLoginSuccessHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
@@ -74,4 +75,5 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         handler.setAlwaysUseDefaultTargetUrl(true);
         return handler;
     }
+
 }
