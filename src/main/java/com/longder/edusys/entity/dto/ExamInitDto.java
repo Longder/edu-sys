@@ -13,6 +13,10 @@ import java.util.List;
 @Data
 public class ExamInitDto implements Serializable {
     /**
+     * 考试名称
+     */
+    private String name;
+    /**
      * 选题方式
      */
     private ChooseWay chooseWay;

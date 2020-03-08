@@ -39,18 +39,43 @@ create table GRADE_CLASS
 )
     comment '班级';
 
-drop table if exists EXAM;
-create table EXAM
+
+drop table if exists EXAM_PAPER;
+create table EXAM_PAPER
 (
-	id_ bigint auto_increment,
-	name_ varchar(255) null,
-	hours_ int null,
-	minutes_ int null,
-	grade_class_id_ bigint null,
-	constraint exam_pk
-		primary key (id_)
+    id_ bigint auto_increment,
+    name_ varchar(255) null,
+    grade_class_id_ bigint null,
+    student_id_ bigint null,
+    exam_type_ varchar(255) null,
+    constraint exam_paper_pk
+        primary key (id_)
 )
-    comment '考试';
+    comment '试卷';
+
+drop table if exists PAPER_DETAIL;
+create table PAPER_DETAIL
+(
+    id_ bigint auto_increment,
+    exam_paper_id_ bigint null,
+    question_id_ bigint null,
+    constraint paper_detail_pk
+        primary key (id_)
+)
+    comment '试卷详情';
+
+drop table if exists EXAM_RESULT;
+create table EXAM_RESULT
+(
+    id_ bigint auto_increment,
+    exam_paper_id_ bigint,
+    score_ int,
+    complete_time_ datetime,
+    student_id_ bigint,
+    constraint exam_result_pk
+        primary key (id_)
+)
+    comment '考试结果';
 
 
 drop table if exists CHAPTER;

@@ -7,7 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class QuestionManageServiceImpl implements QuestionManageService {
@@ -37,5 +39,52 @@ public class QuestionManageServiceImpl implements QuestionManageService {
         //处理习题关联的chapter展示问题
         questionList.forEach(question -> question.getChapter().generateSubjectTitle());
         return questionList;
+    }
+
+    /**
+     * 全章节随机选题，保证满分
+     *
+     * @return
+     */
+    @Override
+    public List<Question> randomAllQuestion() {
+        List<Question> questionList = questionRepository.listAll();
+        return fillQuestionList(questionList);
+    }
+
+    /**
+     * 在指定章节中选题
+     *
+     * @param chapterIds
+     * @return
+     */
+    @Override
+    public List<Question> randomAssignQuestion(List<Long> chapterIds) {
+        List<Question> questionList = questionRepository.listByChapterIds(chapterIds);
+        return fillQuestionList(questionList);
+    }
+
+    /**
+     * 随机选题20次
+     * @return
+     */
+    private List<Question> fillQuestionList(List<Question> sourceList){
+        List<Question> resultList = new ArrayList<>();
+        Random random = new Random();
+        //生成20个随机的index，不能重复
+        List<Integer> indexList = new ArrayList<>();
+        for(int i=0;i<20;i++){
+            int index = random.nextInt(sourceList.size());
+            if(!indexList.contains(index)){
+                indexList.add(index);
+            }else{
+                i--;
+            }
+        }
+        indexList.forEach(index->{
+            resultList.add(sourceList.get(index));
+        });
+
+        return resultList;
     }
 }

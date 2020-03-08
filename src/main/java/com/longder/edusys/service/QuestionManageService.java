@@ -21,4 +21,17 @@ public interface QuestionManageService {
      * @return
      */
     List<Question> listAllQuestion();
+
+    /**
+     * 全章节随机选题，保证满分
+     * @return
+     */
+    List<Question> randomAllQuestion();
+
+    /**
+     * 在指定章节中选题
+     * @param chapterIds
+     * @return
+     */
+    List<Question> randomAssignQuestion(List<Long> chapterIds);
 }

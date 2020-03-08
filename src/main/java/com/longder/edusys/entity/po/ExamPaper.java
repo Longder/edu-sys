@@ -4,17 +4,21 @@ import com.longder.edusys.entity.enums.ExamType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.List;
+
 /**
- * 考试实体
- * 代表某一次考试
+ * 考试试卷
+ * 自测和正式考试都会先生成试卷
  */
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class Exam extends BaseIdEntity{
+public class ExamPaper extends BaseIdEntity{
+
     /**
-     * 名称
+     * 自测的考试没有名称
      */
     private String name;
+
     /**
      * 关联班级(一定有)
      */
@@ -24,19 +28,14 @@ public class Exam extends BaseIdEntity{
      * 关联学生（自测才有）
      */
     private SysUser student;
-    /**
-     * 小时数（考试时间）
-     */
-    private Integer hours;
-    /**
-     * 分钟数 (考试时间)
-     */
-    private Integer minutes;
 
     /**
      * 考试类型
      */
     private ExamType examType;
 
-
+    /**
+     * 试卷详情，展示用
+     */
+    private List<PaperDetail> detailList;
 }

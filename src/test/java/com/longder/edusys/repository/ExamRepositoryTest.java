@@ -1,7 +1,7 @@
 package com.longder.edusys.repository;
 
 import com.longder.edusys.BaseTest;
-import com.longder.edusys.entity.po.Exam;
+import com.longder.edusys.entity.po.ExamPaper;
 import com.longder.edusys.entity.po.GradeClass;
 import org.junit.jupiter.api.Test;
 
@@ -12,22 +12,20 @@ public class ExamRepositoryTest extends BaseTest {
     @Resource
     private GradeClassRepository gradeClassRepository;
     @Resource
-    private ExamRepository examRepository;
+    private ExamPaperRepository examPaperRepository;
 
     @Test
     public void testInsert(){
-        Exam exam = new Exam();
-        exam.setName("考试一");
-        exam.setHours(1);
-        exam.setMinutes(30);
+        ExamPaper paper = new ExamPaper();
+        paper.setName("考试一");
         GradeClass gradeClass = gradeClassRepository.getOne(1L);
-        exam.setGradeClass(gradeClass);
-        examRepository.insert(exam);
+        paper.setGradeClass(gradeClass);
+        examPaperRepository.insert(paper);
     }
 
     @Test
     public void testGetOne(){
-        Exam exam = examRepository.getOne(1L);
+        ExamPaper exam = examPaperRepository.getOne(1L);
         System.out.println(exam);
     }
 }

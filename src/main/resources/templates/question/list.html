@@ -40,6 +40,8 @@
                             <th>序号</th>
                             <th>所属学科章节</th>
                             <th>题目类型</th>
+                            <th>题目内容</th>
+                            <th>答案</th>
                             <th>题目分数</th>
                             <th>操作</th>
                         </tr>
@@ -49,6 +51,8 @@
                             <td th:text="${questionStat.index+1}"></td>
                             <td th:text="${question.chapter.subjectTitle}"></td>
                             <td th:text="${question.type.displayName}"></td>
+                            <td th:text="${question.content}"></td>
+                            <td th:text="${question.answer}"></td>
                             <td th:text="${question.score}"></td>
                             <td>
                                 <a href="#" class="btn btn-sm btn-warning">
