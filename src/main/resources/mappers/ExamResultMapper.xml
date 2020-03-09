@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.longder.edusys.repository.ExamResultRepository">
-
+    <resultMap id="ExamResultResultMap" type="com.longder.edusys.entity.po.ExamResult">
+        <result column="id_" property="id"/>
+        <result column="exam_paper_id_" property="examPaperId"/>
+        <result column="student_id_" property="studentId"/>
+        <result column="score_" property="score"/>
+        <result column="complete_time_" property="completeTime"/>
+        <result column="examPaperName" property="examPaperName"/>
+    </resultMap>
 </mapper>

@@ -1,13 +1,41 @@
 package com.longder.edusys.repository;
 
+import com.longder.edusys.entity.enums.ExamType;
 import com.longder.edusys.entity.po.ExamResult;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.*;
 
+import java.util.List;
+
+/**
+ * 考试结果表操作
+ */
 public interface ExamResultRepository {
 
+    /**
+     * 插入一条考试结果
+     * @param examResult
+     */
     @Options(useGeneratedKeys = true, keyProperty = "id")
     @Insert("INSERT INTO EXAM_RESULT(exam_paper_id_, score_, complete_time_, student_id_) " +
             "values(#{examPaperId},#{score},#{completeTime},#{studentId})")
     void inset(ExamResult examResult);
+
+    /**
+     * 更新考试分数
+     * @param examResult
+     */
+    @Update("update EXAM_RESULT set score_ = #{score} where id_ = #{id}")
+    void updateScore(ExamResult examResult);
+
+    /**
+     * 根据学生Id和考试类型查询
+     * @param studentId
+     * @param examType
+     * @return
+     */
+    @ResultMap("com.longder.edusys.repository.ExamResultRepository.ExamResultResultMap")
+    @Select("SELECT ER.id_,ER.exam_paper_id_, ER.student_id_,ER.score_,ER.complete_time_,EP.name_ as examPaperName  FROM EXAM_RESULT ER " +
+            "    LEFT JOIN EXAM_PAPER EP on ER.exam_paper_id_ = EP.id_" +
+            "    WHERE ER.student_id_ = #{studentId} AND EP.exam_type_ = #{examType.name}")
+    List<ExamResult> listByStudentIdAndExamType(@Param("studentId") Long studentId, @Param("examType")ExamType examType);
 }

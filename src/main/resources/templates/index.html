@@ -63,11 +63,21 @@
                         <span class="nav-label">章节预习</span>
                     </a>
                 </li>
+<!--                th:href="@{/admin/selfExam/choose}"-->
                 <li sec:authorize="hasRole('ROLE_STUDENT')">
-                    <a class="J_menuItem" th:href="@{/admin/selfExam/choose}" title="自我测验">
+                    <a href="#" title="自我测验">
                         <i class="fa fa-book"></i>
                         <span class="nav-label">自我测验</span>
+                        <span class="fa arrow"></span>
                     </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a class="J_menuItem" th:href="@{/admin/selfExam/choose}">开始自测</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" th:href="@{/admin/selfExam/list}" href="#">自测结果</a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </div>

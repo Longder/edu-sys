@@ -69,7 +69,7 @@ create table EXAM_RESULT
 (
     id_ bigint auto_increment,
     exam_paper_id_ bigint,
-    score_ int,
+    score_ decimal null,
     complete_time_ datetime,
     student_id_ bigint,
     constraint exam_result_pk

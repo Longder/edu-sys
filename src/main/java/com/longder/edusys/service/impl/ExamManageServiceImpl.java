@@ -5,10 +5,7 @@ import com.longder.edusys.entity.dto.ExamSubmitDto;
 import com.longder.edusys.entity.enums.ChooseWay;
 import com.longder.edusys.entity.enums.ExamType;
 import com.longder.edusys.entity.po.*;
-import com.longder.edusys.repository.ExamPaperRepository;
-import com.longder.edusys.repository.ExamResultRepository;
-import com.longder.edusys.repository.GradeClassRepository;
-import com.longder.edusys.repository.PaperDetailRepository;
+import com.longder.edusys.repository.*;
 import com.longder.edusys.security.SecurityUtil;
 import com.longder.edusys.service.ExamManageService;
 import com.longder.edusys.service.QuestionManageService;
@@ -16,9 +13,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * 考试管理相关service
@@ -36,6 +36,8 @@ public class ExamManageServiceImpl implements ExamManageService {
     private PaperDetailRepository paperDetailRepository;
     @Resource
     private ExamResultRepository examResultRepository;
+    @Resource
+    private ResultDetailRepository resultDetailRepository;
 
     /**
      * 生成考试
@@ -96,16 +98,39 @@ public class ExamManageServiceImpl implements ExamManageService {
         result.setStudentId(student.getId());
         result.setCompleteTime(LocalDateTime.now());
         examResultRepository.inset(result);
-        //判题
+        //判题，构建考试结果，计分
+        AtomicReference<BigDecimal> score = new AtomicReference<>(BigDecimal.ZERO);
         examSubmitDto.getDetailList().forEach(resultDetail -> {
             Question question = questionManageService.getOneQuestion(resultDetail.getQuestionId());
             resultDetail.checkAnswer(question);
             resultDetail.setExamPaperId(examSubmitDto.getExamId());
             resultDetail.setExamResultId(result.getId());
             resultDetail.setStudentId(student.getId());
+            if (resultDetail.getCorrect()) {
+                score.updateAndGet(s -> s.add(question.getScore()));
+            }
         });
         //存储
+        resultDetailRepository.insert(examSubmitDto.getDetailList());
+        //计分
+        result.setScore(score.get());
+        examResultRepository.updateScore(result);
+    }
 
-
+    /**
+     * 查看某学生的考试结果列表
+     * 区分自测考试还是正常考试
+     *
+     * @param studentId
+     * @param examType
+     * @return
+     */
+    @Override
+    public List<ExamResult> listExamResultForStudent(Long studentId, ExamType examType) {
+        List<ExamResult> resultList = examResultRepository.listByStudentIdAndExamType(studentId,examType);
+        //处理时间展示
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        resultList.forEach(examResult -> examResult.setCompleteTimeStr(formatter.format(examResult.getCompleteTime())));
+        return resultList;
     }
 }

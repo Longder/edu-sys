@@ -2,7 +2,11 @@ package com.longder.edusys.service;
 
 import com.longder.edusys.entity.dto.ExamInitDto;
 import com.longder.edusys.entity.dto.ExamSubmitDto;
+import com.longder.edusys.entity.enums.ExamType;
 import com.longder.edusys.entity.po.ExamPaper;
+import com.longder.edusys.entity.po.ExamResult;
+
+import java.util.List;
 
 /**
  * 考试管理相关service
@@ -21,4 +25,11 @@ public interface ExamManageService {
      * @param examSubmitDto
      */
     void completeExam(ExamSubmitDto examSubmitDto);
+
+    /**
+     * 查看某学生的考试结果列表
+     * 区分自测考试还是正常考试
+     * @return
+     */
+    List<ExamResult> listExamResultForStudent(Long studentId, ExamType examType);
 }

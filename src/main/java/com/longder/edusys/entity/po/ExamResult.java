@@ -3,6 +3,7 @@ package com.longder.edusys.entity.po;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
@@ -19,7 +20,7 @@ public class ExamResult extends BaseIdEntity {
     /**
      * 得分
      */
-    private Integer score;
+    private BigDecimal score;
 
     /**
      * 完成考试的时间
@@ -27,7 +28,17 @@ public class ExamResult extends BaseIdEntity {
     private LocalDateTime completeTime;
 
     /**
+     * 完成时间字符串，展示用
+     */
+    private String completeTimeStr;
+
+    /**
      * 学生id
      */
     private Long studentId;
+
+    /**
+     * 试卷名称，不持久化，查询封装用
+     */
+    private String examPaperName;
 }
