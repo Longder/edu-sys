@@ -77,6 +77,21 @@ create table EXAM_RESULT
 )
     comment '考试结果';
 
+drop table if exists RESULT_DETAIL;
+create table RESULT_DETAIL
+(
+    id_ bigint auto_increment,
+    student_id_ bigint,
+    exam_result_id_ bigint,
+    exam_paper_id_ bigint,
+    question_id_ bigint,
+    answer_ varchar(255),
+    correct_ bit,
+    constraint result_detail_pk
+        primary key (id_)
+)
+    comment '结果详情';
+
 
 drop table if exists CHAPTER;
 create table CHAPTER

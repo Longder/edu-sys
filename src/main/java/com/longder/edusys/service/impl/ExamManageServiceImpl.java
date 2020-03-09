@@ -49,30 +49,30 @@ public class ExamManageServiceImpl implements ExamManageService {
         ExamPaper examPaper = new ExamPaper();
         examPaper.setExamType(examInitDto.getExamType());
         //判断考试类型
-        if(examInitDto.getExamType()== ExamType.SELF){
+        if (examInitDto.getExamType() == ExamType.SELF) {
             examPaper.setName("自我测验");
             //自我测验要记录当前用户的id和所属班级id
             SysUser student = SecurityUtil.getCurrentUser();
             examPaper.setStudent(student);
             assert student != null;
             examPaper.setGradeClass(student.getGradeClass());
-        }else if(examInitDto.getExamType() == ExamType.NORMAL){
+        } else if (examInitDto.getExamType() == ExamType.NORMAL) {
             GradeClass gradeClass = gradeClassRepository.getOne(examInitDto.getClassId());
             examPaper.setGradeClass(gradeClass);
         }
 
         List<Question> questionList = new ArrayList<>();
         //判断选题方式，全随机还是指定章节
-        if(examInitDto.getChooseWay() == ChooseWay.ALL){
+        if (examInitDto.getChooseWay() == ChooseWay.ALL) {
             questionList = questionManageService.randomAllQuestion();
-        }else if(examInitDto.getChooseWay() == ChooseWay.ASSIGN){
+        } else if (examInitDto.getChooseWay() == ChooseWay.ASSIGN) {
             questionList = questionManageService.randomAssignQuestion(examInitDto.getChapterIds());
         }
         //先存试卷
         examPaperRepository.insert(examPaper);
         //生成detail
         List<PaperDetail> detailList = new ArrayList<>();
-        questionList.forEach(question -> detailList.add(new PaperDetail(examPaper,question)));
+        questionList.forEach(question -> detailList.add(new PaperDetail(examPaper, question)));
         //存detail
         paperDetailRepository.insert(detailList);
         examPaper.setDetailList(detailList);
@@ -96,6 +96,16 @@ public class ExamManageServiceImpl implements ExamManageService {
         result.setStudentId(student.getId());
         result.setCompleteTime(LocalDateTime.now());
         examResultRepository.inset(result);
+        //判题
+        examSubmitDto.getDetailList().forEach(resultDetail -> {
+            Question question = questionManageService.getOneQuestion(resultDetail.getQuestionId());
+            resultDetail.checkAnswer(question);
+            resultDetail.setExamPaperId(examSubmitDto.getExamId());
+            resultDetail.setExamResultId(result.getId());
+            resultDetail.setStudentId(student.getId());
+        });
+        //存储
+
 
     }
 }

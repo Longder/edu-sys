@@ -9,6 +9,12 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class ResultDetail extends BaseIdEntity{
+
+    /**
+     * 学生id
+     */
+    private Long studentId;
+
     /**
      * 考试详情id
      */
@@ -33,6 +39,17 @@ public class ResultDetail extends BaseIdEntity{
      * 是否正确
      */
     private Boolean correct;
+
+    /**
+     * 判题
+     */
+    public void checkAnswer(Question question){
+        if(question.getAnswer().equals(answer)){
+            this.correct = true;
+        }else{
+            this.correct = false;
+        }
+    }
 
 }
 

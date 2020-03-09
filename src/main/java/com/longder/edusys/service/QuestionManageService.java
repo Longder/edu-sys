@@ -34,4 +34,11 @@ public interface QuestionManageService {
      * @return
      */
     List<Question> randomAssignQuestion(List<Long> chapterIds);
+
+    /**
+     * 查询获取一个题目
+     * @param questionId
+     * @return
+     */
+    Question getOneQuestion(Long questionId);
 }

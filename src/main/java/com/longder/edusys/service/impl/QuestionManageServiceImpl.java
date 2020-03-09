@@ -65,23 +65,35 @@ public class QuestionManageServiceImpl implements QuestionManageService {
     }
 
     /**
-     * 随机选题20次
+     * 查询获取一个题目
+     *
+     * @param questionId
      * @return
      */
-    private List<Question> fillQuestionList(List<Question> sourceList){
+    @Override
+    public Question getOneQuestion(Long questionId) {
+        return questionRepository.getOne(questionId);
+    }
+
+    /**
+     * 随机选题20次
+     *
+     * @return
+     */
+    private List<Question> fillQuestionList(List<Question> sourceList) {
         List<Question> resultList = new ArrayList<>();
         Random random = new Random();
         //生成20个随机的index，不能重复
         List<Integer> indexList = new ArrayList<>();
-        for(int i=0;i<20;i++){
+        for (int i = 0; i < 20; i++) {
             int index = random.nextInt(sourceList.size());
-            if(!indexList.contains(index)){
+            if (!indexList.contains(index)) {
                 indexList.add(index);
-            }else{
+            } else {
                 i--;
             }
         }
-        indexList.forEach(index->{
+        indexList.forEach(index -> {
             resultList.add(sourceList.get(index));
         });
 
