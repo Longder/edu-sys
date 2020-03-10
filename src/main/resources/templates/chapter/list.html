@@ -40,7 +40,6 @@
                             <th>序号</th>
                             <th>所属学科</th>
                             <th>章节标题</th>
-                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -48,11 +47,6 @@
                                 <td th:text="${chapterStat.index+1}"></td>
                                 <td th:text="${chapter.subject}"></td>
                                 <td th:text="${chapter.title}"></td>
-                                <td>
-                                    <a href="#" class="btn btn-sm btn-warning">
-                                        操作
-                                    </a>
-                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -61,7 +55,6 @@
         </div>
     </div>
 </div>
-<div class="modal inmodal fade" id="chapterModal" tabindex="-1" role="dialog" aria-hidden="true"></div>
 <!--引入统一JS-->
 <script th:replace="import/script :: script"></script>
 </body>

@@ -1,9 +1,8 @@
 package com.longder.edusys.repository;
 
+import com.longder.edusys.entity.dto.QuestionCountDto;
 import com.longder.edusys.entity.po.ResultDetail;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,4 +24,26 @@ public interface ResultDetailRepository {
             "</script>"
     })
     void insert(@Param("detailList") List<ResultDetail> detailList);
+
+    /**
+     * 查询某个考试结果的详情
+     * @param examResultId
+     * @return
+     */
+    @ResultMap("com.longder.edusys.repository.ResultDetailRepository.ResultDetailResultMap")
+    @Select("SELECT RD.id_ AS rd_id, student_id_, exam_result_id_, exam_paper_id_, question_id_, RD.answer_ as rd_answer, correct_, " +
+            "       Q.id_ AS q_id, content_, type_, score_, Q.answer_ as q_answer, chapter_id_, choice_A_, choice_B_, choice_C_, choice_D_ " +
+            "       FROM RESULT_DETAIL RD" +
+            "    LEFT JOIN question q on rd.question_id_ = q.id_ WHERE RD.exam_result_id_ = #{examResultId}")
+    List<ResultDetail> listByExamResultId(@Param("examResultId") Long examResultId);
+
+    /**
+     * 统计错题
+     * @param studentId
+     * @return
+     */
+    @ResultMap("com.longder.edusys.repository.ResultDetailRepository.QuestionCountResultMap")
+    @Select("SELECT question_id_,count(id_) as count_ FROM result_detail WHERE student_id_ = #{studentId} AND correct_ = 0" +
+            "    GROUP BY question_id_")
+    List<QuestionCountDto> countWrongQuestionByStudentId(@Param("studentId") Long studentId);
 }

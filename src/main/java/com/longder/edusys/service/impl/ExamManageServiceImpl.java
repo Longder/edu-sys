@@ -1,6 +1,7 @@
 package com.longder.edusys.service.impl;
 
 import com.longder.edusys.entity.dto.ExamInitDto;
+import com.longder.edusys.entity.dto.ExamResultDto;
 import com.longder.edusys.entity.dto.ExamSubmitDto;
 import com.longder.edusys.entity.enums.ChooseWay;
 import com.longder.edusys.entity.enums.ExamType;
@@ -132,5 +133,23 @@ public class ExamManageServiceImpl implements ExamManageService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         resultList.forEach(examResult -> examResult.setCompleteTimeStr(formatter.format(examResult.getCompleteTime())));
         return resultList;
+    }
+
+    /**
+     * 获取考试详情
+     *
+     * @param examResultId
+     * @return
+     */
+    @Override
+    public ExamResultDto getExamResultDetail(Long examResultId) {
+        ExamResultDto dto = new ExamResultDto();
+        ExamResult examResult = examResultRepository.getOne(examResultId);
+        dto.setExamName(examResult.getExamPaperName());
+        dto.setScore(examResult.getScore());
+        //查询详情
+        List<ResultDetail> detailList = resultDetailRepository.listByExamResultId(examResultId);
+        dto.setDetailList(detailList);
+        return dto;
     }
 }

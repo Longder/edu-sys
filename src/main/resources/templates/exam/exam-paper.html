@@ -31,14 +31,14 @@
                         <div class="col-sm-9"></div>
                     </div>
                     <div class="table table-bordered table-hover">
-                        <div class="mail-box-header">
-                            <h2 class="text-center" th:text="${exam.name}"></h2>
-                            <div class="time-item">
-                                <strong id="hour_show">0时</strong>
-                                <strong id="minute_show">0分</strong>
-                                <strong id="second_show">0秒</strong>
-                            </div>
-                        </div>
+<!--                        <div class="mail-box-header">-->
+<!--                            <h2 class="text-center" th:text="${exam.name}"></h2>-->
+<!--                            <div class="time-item">-->
+<!--                                <strong id="hour_show">0时</strong>-->
+<!--                                <strong id="minute_show">0分</strong>-->
+<!--                                <strong id="second_show">0秒</strong>-->
+<!--                            </div>-->
+<!--                        </div>-->
                         <form method="post" th:action="@{/admin/exam/complete}">
                             <input type="hidden" name="examId" th:value="${exam.id}"/>
                             <div class="mail-box" th:each="detail:${exam.detailList}">

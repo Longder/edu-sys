@@ -31,6 +31,11 @@ public class ResultDetail extends BaseIdEntity{
     private Long questionId;
 
     /**
+     * 题目，展示用
+     */
+    private Question question;
+
+    /**
      * 填写的回答
      */
     private String answer;

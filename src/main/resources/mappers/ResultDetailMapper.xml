@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longder.edusys.repository.ResultDetailRepository">
+    <resultMap id="ResultDetailResultMap" type="com.longder.edusys.entity.po.ResultDetail">
+        <id column="rd_id" property="id"/>
+        <result column="student_id_" property="studentId"/>
+        <result column="exam_result_id_" property="examResultId"/>
+        <result column="exam_paper_id_" property="examPaperId"/>
+        <result column="rd_answer" property="answer"/>
+        <result column="correct_" property="correct"/>
+        <result column="q_id" property="questionId"/>
+        <association property="question" javaType="com.longder.edusys.entity.po.Question">
+            <id column="q_id" property="id"/>
+            <result column="content_" property="content"/>
+            <result column="type_" property="type"/>
+            <result column="score_" property="score"/>
+            <result column="q_answer" property="answer"/>
+            <result column="choice_A_" property="choiceA"/>
+            <result column="choice_B_" property="choiceB"/>
+            <result column="choice_C_" property="choiceC"/>
+            <result column="choice_D_" property="choiceD"/>
+        </association>
+    </resultMap>
+    <resultMap id="QuestionCountResultMap" type="com.longder.edusys.entity.dto.QuestionCountDto">
+        <result column="question_id_" property="questionId"/>
+        <result column="count_" property="count"/>
+    </resultMap>
+</mapper>

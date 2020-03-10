@@ -79,6 +79,12 @@
                         </li>
                     </ul>
                 </li>
+                <li sec:authorize="hasRole('ROLE_STUDENT')">
+                    <a class="J_menuItem" th:href="@{/admin/reviewLesson/wrongQuestion/list}" title="错题复习">
+                        <i class="fa fa-warning"></i>
+                        <span class="nav-label">错题复习</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
@@ -117,11 +123,11 @@
                     <li class="J_tabCloseOther"><a>关闭其他</a>
                     </li>
                 </ul>
-                <a id="changePasswordButton" type="button" class="roll-nav roll-right J_tabExit" data-toggle="modal"
-                   data-target="#editPasswordModal"
-                   onclick="openModal('/admin/user/toChangePassword','editPasswordModal')">
-                    修改密码
-                </a>
+<!--                <a id="changePasswordButton" type="button" class="roll-nav roll-right J_tabExit" data-toggle="modal"-->
+<!--                   data-target="#editPasswordModal"-->
+<!--                   onclick="openModal('/admin/user/toChangePassword','editPasswordModal')">-->
+<!--                    修改密码-->
+<!--                </a>-->
             </div>
             <a href="/logout" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
         </div>

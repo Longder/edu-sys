@@ -1,12 +1,15 @@
 package com.longder.edusys.controller;
 
+import com.longder.edusys.entity.dto.ExamResultDto;
 import com.longder.edusys.entity.enums.ExamType;
 import com.longder.edusys.entity.po.Chapter;
 import com.longder.edusys.entity.po.ExamResult;
 import com.longder.edusys.entity.po.SysUser;
+import com.longder.edusys.entity.vo.QuestionWrongCountListVo;
 import com.longder.edusys.security.SecurityUtil;
 import com.longder.edusys.service.ChapterManageService;
 import com.longder.edusys.service.ExamManageService;
+import com.longder.edusys.service.QuestionManageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,8 +65,10 @@ public class SelfExamController {
      */
     @GetMapping("/detail/{examResultId}")
     public String detail(Model model,@PathVariable("examResultId") Long examResultId){
-        System.out.println("自我测验详情");
+        ExamResultDto dto = examManageService.getExamResultDetail(examResultId);
+        model.addAttribute("dto",dto);
         return "selfExam/detail";
     }
+
 
 }

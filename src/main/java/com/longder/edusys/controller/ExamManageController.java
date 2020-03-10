@@ -41,6 +41,6 @@ public class ExamManageController {
     @PostMapping("/complete")
     public String completeExam(ExamSubmitDto dto){
         examManageService.completeExam(dto);
-        return null;
+        return "redirect:/admin/selfExam/list";
     }
 }

@@ -1,6 +1,7 @@
 package com.longder.edusys.service;
 
 import com.longder.edusys.entity.dto.ExamInitDto;
+import com.longder.edusys.entity.dto.ExamResultDto;
 import com.longder.edusys.entity.dto.ExamSubmitDto;
 import com.longder.edusys.entity.enums.ExamType;
 import com.longder.edusys.entity.po.ExamPaper;
@@ -32,4 +33,12 @@ public interface ExamManageService {
      * @return
      */
     List<ExamResult> listExamResultForStudent(Long studentId, ExamType examType);
+
+    /**
+     * 获取考试详情
+     * @param examResultId
+     * @return
+     */
+    ExamResultDto getExamResultDetail(Long examResultId);
+
 }

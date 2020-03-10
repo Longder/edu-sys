@@ -1,6 +1,7 @@
 package com.longder.edusys.service;
 
 import com.longder.edusys.entity.po.Question;
+import com.longder.edusys.entity.vo.QuestionWrongCountListVo;
 
 import java.util.List;
 
@@ -41,4 +42,13 @@ public interface QuestionManageService {
      * @return
      */
     Question getOneQuestion(Long questionId);
+
+
+    /**
+     * 错题统计列表展示
+     * @param studentId
+     * @return
+     */
+    List<QuestionWrongCountListVo> listWrongQuestionCount(Long studentId);
+
 }

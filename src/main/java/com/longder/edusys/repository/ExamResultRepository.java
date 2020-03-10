@@ -38,4 +38,13 @@ public interface ExamResultRepository {
             "    LEFT JOIN EXAM_PAPER EP on ER.exam_paper_id_ = EP.id_" +
             "    WHERE ER.student_id_ = #{studentId} AND EP.exam_type_ = #{examType.name}")
     List<ExamResult> listByStudentIdAndExamType(@Param("studentId") Long studentId, @Param("examType")ExamType examType);
+
+    /**
+     * 获取一个考试结果
+     * @param examResultId
+     * @return
+     */
+    @ResultMap("com.longder.edusys.repository.ExamResultRepository.ExamResultResultMap")
+    @Select("SELECT * FROM exam_result WHERE id_ = #{examResultId}")
+    ExamResult getOne(@Param("examResultId") Long examResultId);
 }
