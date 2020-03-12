@@ -28,7 +28,6 @@ public class ExamManageController {
      */
     @PostMapping("/init")
     public String initExam(ExamInitDto dto, Model model){
-        System.out.println(dto);
         ExamPaper examPaper = examManageService.generateExam(dto);
         model.addAttribute("exam",examPaper);
         return "exam/exam-paper";

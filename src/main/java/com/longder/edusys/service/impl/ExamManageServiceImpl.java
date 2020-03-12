@@ -61,6 +61,8 @@ public class ExamManageServiceImpl implements ExamManageService {
             examPaper.setGradeClass(student.getGradeClass());
         } else if (examInitDto.getExamType() == ExamType.NORMAL) {
             GradeClass gradeClass = gradeClassRepository.getOne(examInitDto.getClassId());
+            examPaper.setName(examInitDto.getName());
+            examInitDto.setChooseWay(ChooseWay.ALL);
             examPaper.setGradeClass(gradeClass);
         }
 
