@@ -8,7 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
  */
 public enum SysRole implements GrantedAuthority {
     ROLE_ADMIN("ROLE_ADMIN","管理员","系统管理员"),
-    ROLE_TEACHER("ROLE_STUDENT","教师","教师"),
+    ROLE_TEACHER("ROLE_TEACHER","教师","教师"),
     ROLE_STUDENT("ROLE_STUDENT","学生","学生");
     /**
      * 名称

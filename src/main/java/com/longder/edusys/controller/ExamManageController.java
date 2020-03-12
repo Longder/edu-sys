@@ -2,6 +2,7 @@ package com.longder.edusys.controller;
 
 import com.longder.edusys.entity.dto.ExamInitDto;
 import com.longder.edusys.entity.dto.ExamSubmitDto;
+import com.longder.edusys.entity.enums.ExamType;
 import com.longder.edusys.entity.po.ExamPaper;
 import com.longder.edusys.service.ExamManageService;
 import org.springframework.stereotype.Controller;
@@ -30,6 +31,11 @@ public class ExamManageController {
     public String initExam(ExamInitDto dto, Model model){
         ExamPaper examPaper = examManageService.generateExam(dto);
         model.addAttribute("exam",examPaper);
+        if(dto.getExamType() == ExamType.SELF){//自测
+            return "exam/exam-paper";
+        }else if(dto.getExamType() == ExamType.NORMAL){//正常
+
+        }
         return "exam/exam-paper";
     }
 

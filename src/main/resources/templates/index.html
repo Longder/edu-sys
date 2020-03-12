@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <!--引入统一头-->
 <head th:include="import/head :: head"></head>
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -63,7 +64,6 @@
                         <span class="nav-label">章节预习</span>
                     </a>
                 </li>
-<!--                th:href="@{/admin/selfExam/choose}"-->
                 <li sec:authorize="hasRole('ROLE_STUDENT')">
                     <a href="#" title="自我测验">
                         <i class="fa fa-book"></i>
@@ -83,6 +83,18 @@
                     <a class="J_menuItem" th:href="@{/admin/reviewLesson/wrongQuestion/list}" title="错题复习">
                         <i class="fa fa-warning"></i>
                         <span class="nav-label">错题复习</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_TEACHER')">
+                    <a class="J_menuItem" th:href="@{/admin/classExam/init}" title="错题复习">
+                        <i class="fa fa-warning"></i>
+                        <span class="nav-label">发布考试</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasRole('ROLE_TEACHER')">
+                    <a class="J_menuItem" th:href="@{/admin/reviewLesson/wrongQuestion/list}" title="错题复习">
+                        <i class="fa fa-warning"></i>
+                        <span class="nav-label">考试详情</span>
                     </a>
                 </li>
             </ul>
