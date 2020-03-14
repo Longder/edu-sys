@@ -41,4 +41,11 @@ public interface ExamManageService {
      */
     ExamResultDto getExamResultDetail(Long examResultId);
 
+    /**
+     * 查看某班级的考试班级考试列表
+     * @param gradeClassId
+     * @return
+     */
+    List<ExamPaper> listClassExam(Long gradeClassId);
+
 }

@@ -27,7 +27,15 @@
                         <div class="form-group">
                             <label class="col-sm-2 control-label">管理班级：</label>
                             <div class="col-sm-10">
-                                一班
+                                <input type="text" readonly class="form-control" th:value="${gradeClass.name}"/>
+                                <input type="hidden" name="classId" th:value="${gradeClass.id}"/>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">试卷名称：</label>
+                            <div class="col-sm-10">
+                                <input type="text" required class="form-control" name="name"/>
                             </div>
                         </div>
                         <div class="hr-line-dashed"></div>
@@ -35,24 +43,24 @@
                             <label class="col-sm-2 control-label">试卷生成方式：</label>
                             <div class="col-sm-10">
                                 <label class="checkbox-inline i-checks">
-                                    <input id="all-radio" name="chooseWay" type="radio" value="ALL" checked>全章节随机</label>
-                                <label class="checkbox-inline i-checks">
-                                    <input id="assign-radio" name="chooseWay" type="radio" value="ASSIGN">指定章节</label>
+                                    <input id="all-radio" name="chooseWay" type="radio" readonly value="ALL" checked>全章节随机</label>
+<!--                                <label class="checkbox-inline i-checks">-->
+<!--                                    <input id="assign-radio" name="chooseWay" type="radio" value="ASSIGN">指定章节</label>-->
                             </div>
                         </div>
-                        <div class="hr-line-dashed"></div>
-                        <div class="form-group" id="chapter-select" style="display: none">
-                            <label class="col-sm-2 control-label">
-                                选择章节：
-                            </label>
-                            <div class="col-sm-10" style="padding-top: 10px;">
-                                <div class="i-checks" th:each="chapter:${chapterList}">
-                                    <label>
-                                        <input name="chapterIds" type="checkbox" th:value="${chapter.id}"> <i></i> <span th:text="${chapter.subjectTitle}"></span>
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
+<!--                        <div class="hr-line-dashed"></div>-->
+<!--                        <div class="form-group" id="chapter-select" style="display: none">-->
+<!--                            <label class="col-sm-2 control-label">-->
+<!--                                选择章节：-->
+<!--                            </label>-->
+<!--                            <div class="col-sm-10" style="padding-top: 10px;">-->
+<!--                                <div class="i-checks" th:each="chapter:${chapterList}">-->
+<!--                                    <label>-->
+<!--                                        <input name="chapterIds" type="checkbox" th:value="${chapter.id}"> <i></i> <span th:text="${chapter.subjectTitle}"></span>-->
+<!--                                    </label>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2">
@@ -67,5 +75,25 @@
 </div>
 <!--引入统一JS-->
 <script th:replace="import/script :: script"></script>
+<script>
+    $(function(){
+        //iCHeck使能
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+
+        //选择所有章节
+        $("#all-radio").on("ifChecked",function(){
+            $("#chapter-select").hide();
+        });
+
+        //选择指定章节
+        $("#assign-radio").on("ifChecked",function(){
+            $("#chapter-select").show();
+        });
+
+    });
+</script>
 </body>
 </html>

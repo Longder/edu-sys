@@ -50,6 +50,7 @@ public class ExamManageServiceImpl implements ExamManageService {
     @Transactional
     public ExamPaper generateExam(ExamInitDto examInitDto) {
         ExamPaper examPaper = new ExamPaper();
+        examPaper.setCreateTime(LocalDateTime.now());
         examPaper.setExamType(examInitDto.getExamType());
         //判断考试类型
         if (examInitDto.getExamType() == ExamType.SELF) {
@@ -62,6 +63,7 @@ public class ExamManageServiceImpl implements ExamManageService {
         } else if (examInitDto.getExamType() == ExamType.NORMAL) {
             GradeClass gradeClass = gradeClassRepository.getOne(examInitDto.getClassId());
             examPaper.setName(examInitDto.getName());
+            //正常考试默认全章节
             examInitDto.setChooseWay(ChooseWay.ALL);
             examPaper.setGradeClass(gradeClass);
         }
@@ -80,6 +82,7 @@ public class ExamManageServiceImpl implements ExamManageService {
         questionList.forEach(question -> detailList.add(new PaperDetail(examPaper, question)));
         //存detail
         paperDetailRepository.insert(detailList);
+        //封装返回
         examPaper.setDetailList(detailList);
         return examPaper;
     }
@@ -153,5 +156,17 @@ public class ExamManageServiceImpl implements ExamManageService {
         List<ResultDetail> detailList = resultDetailRepository.listByExamResultId(examResultId);
         dto.setDetailList(detailList);
         return dto;
+    }
+
+    /**
+     * 查看某班级的考试班级考试列表
+     *
+     * @param gradeClassId
+     * @return
+     */
+    @Override
+    public List<ExamPaper> listClassExam(Long gradeClassId) {
+
+        return null;
     }
 }

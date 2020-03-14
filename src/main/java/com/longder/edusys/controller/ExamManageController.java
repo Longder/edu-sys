@@ -34,7 +34,7 @@ public class ExamManageController {
         if(dto.getExamType() == ExamType.SELF){//自测
             return "exam/exam-paper";
         }else if(dto.getExamType() == ExamType.NORMAL){//正常
-
+            return "classExam/list";
         }
         return "exam/exam-paper";
     }

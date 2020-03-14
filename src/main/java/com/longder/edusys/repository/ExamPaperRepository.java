@@ -1,11 +1,10 @@
 package com.longder.edusys.repository;
 
 import com.longder.edusys.entity.po.ExamPaper;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 
 /**
@@ -23,7 +22,16 @@ public interface ExamPaperRepository {
      * @param examPaper
      */
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    @Insert("INSERT INTO exam_paper(name_,grade_class_id_,exam_type_,student_id_) VALUES(#{name},#{gradeClass.id},#{examType},#{student.id})")
+    @Insert("INSERT INTO exam_paper(name_,grade_class_id_,exam_type_,student_id_,create_time_) VALUES(#{name},#{gradeClass.id},#{examType},#{student.id},#{createTime})")
     void insert(ExamPaper examPaper);
+
+    /**
+     * 查询某班级下的正式考试列表
+     * @param gradeClassId
+     * @return
+     */
+    @ResultMap("com.longder.edusys.repository.ExamPaperRepository.ExamPaperResultMap")
+    @Select("SELECT * FROM exam_paper e,grade_class g WHERE e.grade_class_id_ = g.id_ and e.grade_class_id_ = #{gradeClassId} and e.exam_type_ = 'NORMAL'")
+    List<ExamPaper> listNormalExamPaperByClassId(@Param("gradeClassId") Long gradeClassId);
 
 }

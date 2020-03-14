@@ -4,6 +4,7 @@ import com.longder.edusys.entity.enums.ExamType;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -35,7 +36,13 @@ public class ExamPaper extends BaseIdEntity{
     private ExamType examType;
 
     /**
+     * 创建时间
+     */
+    private LocalDateTime createTime;
+
+    /**
      * 试卷详情，展示用
      */
     private List<PaperDetail> detailList;
+
 }

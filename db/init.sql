@@ -48,6 +48,7 @@ create table EXAM_PAPER
     grade_class_id_ bigint null,
     student_id_ bigint null,
     exam_type_ varchar(255) null,
+    create_time_ datetime,
     constraint exam_paper_pk
         primary key (id_)
 )
