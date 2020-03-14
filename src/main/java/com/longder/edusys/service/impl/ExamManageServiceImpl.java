@@ -165,8 +165,51 @@ public class ExamManageServiceImpl implements ExamManageService {
      * @return
      */
     @Override
-    public List<ExamPaper> listClassExam(Long gradeClassId) {
+    public List<ExamPaper> listClassExamForManage(Long gradeClassId) {
+        List<ExamPaper> paperList = examPaperRepository.listNormalExamPaperByClassId(gradeClassId);
+        paperList.forEach(examPaper -> {
+            //处理创建时间展示
+            examPaper.generateCreateTime();
+            //统计参考学生人数
+            Integer count = examResultRepository.countStudentForByExamPaperId(examPaper.getId());
+            examPaper.setStudentCount(count==null?0:count);
+        });
+        return paperList;
+    }
 
-        return null;
+    /**
+     * 查看某学生可以参加的班级考试列表
+     *
+     * @param gradeClassId
+     * @param studentId
+     * @return
+     */
+    @Override
+    public List<ExamPaper> listClassExamForStudent(Long gradeClassId, Long studentId) {
+        List<ExamPaper> paperList = examPaperRepository.listNormalExamPaperByClassId(gradeClassId);
+        //过滤，检查改学生是否已经参加过此次考试，如果参加过就remove
+        paperList.removeIf(examPaper -> {
+            int count = examResultRepository.countByStudentIdAndExamPaperId(studentId,examPaper.getId());
+            return count>0;
+        });
+        //处理创建时间展示
+        paperList.forEach(ExamPaper::generateCreateTime);
+        return paperList;
+    }
+
+    /**
+     * 查询获取一个试卷信息，包括详情
+     *
+     * @param examPaperId
+     * @return
+     */
+    @Override
+    public ExamPaper getOneExamPaper(Long examPaperId) {
+        ExamPaper examPaper = examPaperRepository.getOne(examPaperId);
+        //试卷详情
+        List<PaperDetail> paperDetailList = paperDetailRepository.listByExamPaperId(examPaperId);
+        //封装
+        examPaper.setDetailList(paperDetailList);
+        return examPaper;
     }
 }

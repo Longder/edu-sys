@@ -47,4 +47,22 @@ public interface ExamResultRepository {
     @ResultMap("com.longder.edusys.repository.ExamResultRepository.ExamResultResultMap")
     @Select("SELECT * FROM exam_result WHERE id_ = #{examResultId}")
     ExamResult getOne(@Param("examResultId") Long examResultId);
+
+    /**
+     * 根据试卷统计参考了此试卷的学生数量
+     * @param examPaperId
+     * @return
+     */
+    @Select("SELECT count(student_id_) as student_count " +
+            "    FROM EXAM_RESULT where exam_paper_id_ = #{examPaperId}")
+    Integer countStudentForByExamPaperId(@Param("examPaperId") Long examPaperId);
+
+    /**
+     * 根据学生和试卷id统计考试结果
+     * @param studentId
+     * @param examPaperId
+     * @return
+     */
+    @Select("SELECT COUNT(id_) FROM EXAM_RESULT where student_id_ = 3 and exam_paper_id_ = 13")
+    Integer countByStudentIdAndExamPaperId(@Param("studentId") Long studentId,@Param("examPaperId")Long examPaperId);
 }

@@ -1,9 +1,7 @@
 package com.longder.edusys.repository;
 
 import com.longder.edusys.entity.po.PaperDetail;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,4 +23,15 @@ public interface PaperDetailRepository {
             "</script>"
     })
     void insert(@Param("detailList") List<PaperDetail> detailList);
+
+    /**
+     * 根据试卷id查询试卷详情
+     * @param examPaperId
+     * @return
+     */
+    @ResultMap("com.longder.edusys.repository.PaperDetailRepository.PaperDetailResultMap")
+    @Select("SELECT PD.id_ AS pd_id,  exam_paper_id_, question_id_,Q.* FROM PAPER_DETAIL PD " +
+            "    LEFT JOIN QUESTION Q on PD.question_id_ = Q.id_ " +
+            "    WHERE exam_paper_id_ = #{examPaperId}")
+    List<PaperDetail> listByExamPaperId(@Param("examPaperId") Long examPaperId);
 }

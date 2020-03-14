@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -41,8 +42,26 @@ public class ExamPaper extends BaseIdEntity{
     private LocalDateTime createTime;
 
     /**
+     * 创建时间展示用的字符串
+     */
+    private String createTimeStr;
+
+    /**
      * 试卷详情，展示用
      */
     private List<PaperDetail> detailList;
+
+    /**
+     * 参考学生人数，展示用
+     */
+    private Integer studentCount;
+
+    /**
+     * 处理
+     */
+    public void generateCreateTime(){
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        this.createTimeStr = formatter.format(this.getCreateTime());
+    }
 
 }

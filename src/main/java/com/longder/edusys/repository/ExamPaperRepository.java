@@ -31,7 +31,7 @@ public interface ExamPaperRepository {
      * @return
      */
     @ResultMap("com.longder.edusys.repository.ExamPaperRepository.ExamPaperResultMap")
-    @Select("SELECT * FROM exam_paper e,grade_class g WHERE e.grade_class_id_ = g.id_ and e.grade_class_id_ = #{gradeClassId} and e.exam_type_ = 'NORMAL'")
+    @Select("SELECT e.*,g.*,g.name_ as class_name FROM exam_paper e,grade_class g WHERE e.grade_class_id_ = g.id_ and e.grade_class_id_ = #{gradeClassId} and e.exam_type_ = 'NORMAL'")
     List<ExamPaper> listNormalExamPaperByClassId(@Param("gradeClassId") Long gradeClassId);
 
 }

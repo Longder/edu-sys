@@ -1,5 +1,6 @@
 package com.longder.edusys.entity.dto;
 
+import com.longder.edusys.entity.enums.ExamType;
 import com.longder.edusys.entity.po.ExamResult;
 import com.longder.edusys.entity.po.ResultDetail;
 import lombok.Data;
@@ -17,6 +18,11 @@ public class ExamSubmitDto implements Serializable {
      * 考试id
      */
     private Long examId;
+
+    /**
+     * 考试类型
+     */
+    private ExamType examType;
 
     /**
      * 考试结果

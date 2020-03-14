@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.longder.edusys.repository.PaperDetailRepository">
+    <resultMap id="PaperDetailResultMap" type="com.longder.edusys.entity.po.PaperDetail">
+        <id column="pd_id" property="id"/>
+        <result property="examPaperId" column="exam_paper_id_"/>
+        <association property="question" javaType="com.longder.edusys.entity.po.Question">
+            <id column="question_id_" property="id"/>
+            <result column="content_" property="content"/>
+            <result column="type_" property="type"/>
+            <result column="score_" property="score"/>
+            <result column="answer_" property="answer"/>
+            <result column="choice_A_" property="choiceA"/>
+            <result column="choice_B_" property="choiceB"/>
+            <result column="choice_C_" property="choiceC"/>
+            <result column="choice_D_" property="choiceD"/>
+        </association>
+    </resultMap>
+</mapper>

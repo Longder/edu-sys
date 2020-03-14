@@ -4,10 +4,11 @@
     <resultMap id="ExamPaperResultMap" type="com.longder.edusys.entity.po.ExamPaper">
         <id column="id_" property="id"/>
         <result column="name_" property="name"/>
+        <result column="exam_type_" property="examType"/>
         <result column="create_time_" property="createTime"/>
         <association property="gradeClass" javaType="com.longder.edusys.entity.po.GradeClass">
             <id property="id" column="id_"/>
-            <result property="name" column="name_"/>
+            <result property="name" column="class_name"/>
             <result property="description" column="description_"/>
         </association>
     </resultMap>

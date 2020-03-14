@@ -18,7 +18,7 @@
                                 <span class="clear">
                                <span class="block m-t-xs">
                                    <strong class="font-bold">
-                                   您好！大表哥
+                                   您好！欢迎登陆
                                    </strong>
                                </span>
                                 </span>
@@ -80,6 +80,21 @@
                     </ul>
                 </li>
                 <li sec:authorize="hasRole('ROLE_STUDENT')">
+                    <a href="#" title="班级考试">
+                        <i class="fa fa-anchor"></i>
+                        <span class="nav-label">班级考试</span>
+                        <span class="fa arrow"></span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li>
+                            <a class="J_menuItem" th:href="@{/admin/classExam/list}">参加考试</a>
+                        </li>
+                        <li>
+                            <a class="J_menuItem" th:href="@{/admin/selfExam/list}" href="#">考试结果</a>
+                        </li>
+                    </ul>
+                </li>
+                <li sec:authorize="hasRole('ROLE_STUDENT')">
                     <a class="J_menuItem" th:href="@{/admin/reviewLesson/wrongQuestion/list}" title="错题复习">
                         <i class="fa fa-warning"></i>
                         <span class="nav-label">错题复习</span>
@@ -92,9 +107,9 @@
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_TEACHER')">
-                    <a class="J_menuItem" th:href="@{/admin/reviewLesson/wrongQuestion/list}" title="错题复习">
+                    <a class="J_menuItem" th:href="@{/admin/classExam/manage/list}" title="考试管理">
                         <i class="fa fa-warning"></i>
-                        <span class="nav-label">考试详情</span>
+                        <span class="nav-label">考试管理</span>
                     </a>
                 </li>
             </ul>

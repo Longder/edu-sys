@@ -42,10 +42,25 @@ public interface ExamManageService {
     ExamResultDto getExamResultDetail(Long examResultId);
 
     /**
-     * 查看某班级的考试班级考试列表
+     * 查看某班级的考试班级考试列表（教师用）
      * @param gradeClassId
      * @return
      */
-    List<ExamPaper> listClassExam(Long gradeClassId);
+    List<ExamPaper> listClassExamForManage(Long gradeClassId);
+
+    /**
+     * 查看某学生可以参加的班级考试列表
+     * @param gradeClassId
+     * @param studentId
+     * @return
+     */
+    List<ExamPaper> listClassExamForStudent(Long gradeClassId,Long studentId);
+
+    /**
+     * 查询获取一个试卷信息，包括详情
+     * @param examPaperId
+     * @return
+     */
+    ExamPaper getOneExamPaper(Long examPaperId);
 
 }
