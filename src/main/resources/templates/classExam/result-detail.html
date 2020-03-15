@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<!--引入统一头-->
+<head th:include="import/head :: head"></head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5 th:text="${dto.examName}"></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-sm-3">
+                        <span class="input-group-btn">
+                            <button onclick="window.history.back()" type="button" class="btn btn-primary">返回</button>
+                        </span>
+                        </div>
+                        <div class="col-sm-9"></div>
+                    </div>
+                    <div class="table table-bordered table-hover">
+                        <div class="mail-box" th:each="detail:${dto.detailList}">
+                            <input type="hidden" th:name="'detailList['+${detailStat.index}+'].questionId'" th:value="${detail.question.id}"/>
+                            <div class="mail-body">
+                                <p>
+                                    <span th:text="${detailStat.index+1}"></span>.<span
+                                        th:text="${detail.question.type.displayName}"></span>：<span
+                                        th:text="${detail.question.content}"></span>
+                                </p>
+                                <p>分值：<span th:text="${detail.question.score}"></span></p>
+                                <p class="text-danger" th:if="${!detail.correct}">回答错误</p>
+                                <p class="text-success" th:if="${detail.correct}">回答正确</p>
+                                <div th:if="${detail.question.type.name =='CHOICE'}">
+                                    <div class="radio radio-info">
+                                        <input readonly th:id="'Q'+${detailStat.index}+'A'" type="radio" th:checked="${detail.answer=='A'}">
+                                        <label th:for="'Q'+${detailStat.index}+'A'">A.<span th:text="${detail.question.choiceA}"></span></label>
+                                    </div>
+                                    <div class="radio radio-info">
+                                        <input readonly th:id="'Q'+${detailStat.index}+'B'" type="radio" th:checked="${detail.answer=='B'}">
+                                        <label th:for="'Q'+${detailStat.index}+'B'">B.<span th:text="${detail.question.choiceB}"></span></label>
+                                    </div>
+                                    <div class="radio radio-info">
+                                        <input readonly th:id="'Q'+${detailStat.index}+'C'" type="radio" th:checked="${detail.answer=='C'}">
+                                        <label th:for="'Q'+${detailStat.index}+'C'">C.<span th:text="${detail.question.choiceC}"></span></label>
+                                    </div>
+                                    <div class="radio radio-info">
+                                        <input readonly th:id="'Q'+${detailStat.index}+'A'" type="radio" th:checked="${detail.answer=='D'}">
+                                        <label th:for="'Q'+${detailStat.index}+'D'">D.<span th:text="${detail.question.choiceD}"></span></label>
+                                    </div>
+                                </div>
+                                <p th:if="${detail.question.type.name == 'FILL'}">
+                                    <input readonly type="text" class="form-control" th:value="${detail.answer}"/>
+                                </p>
+                                <p>
+                                    正确答案：<span th:text="${detail.question.answer}"></span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--引入统一JS-->
+<script th:replace="import/script :: script"></script>
+</body>
+</html>

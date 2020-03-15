@@ -63,4 +63,11 @@ public interface ExamManageService {
      */
     ExamPaper getOneExamPaper(Long examPaperId);
 
+    /**
+     * 根据试卷查询此试卷的考试结果，包括所有学生的
+     * @param examPaperId
+     * @return
+     */
+    List<ExamResult> listExamResultByPaperId(Long examPaperId);
+
 }

@@ -90,7 +90,7 @@
                             <a class="J_menuItem" th:href="@{/admin/classExam/list}">参加考试</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" th:href="@{/admin/selfExam/list}" href="#">考试结果</a>
+                            <a class="J_menuItem" th:href="@{/admin/classExam/result}" href="#">考试结果</a>
                         </li>
                     </ul>
                 </li>
@@ -101,14 +101,14 @@
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_TEACHER')">
-                    <a class="J_menuItem" th:href="@{/admin/classExam/init}" title="错题复习">
-                        <i class="fa fa-warning"></i>
+                    <a class="J_menuItem" th:href="@{/admin/classExam/init}" title="发布考试">
+                        <i class="fa fa-align-center"></i>
                         <span class="nav-label">发布考试</span>
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_TEACHER')">
                     <a class="J_menuItem" th:href="@{/admin/classExam/manage/list}" title="考试管理">
-                        <i class="fa fa-warning"></i>
+                        <i class="fa fa-file-code-o"></i>
                         <span class="nav-label">考试管理</span>
                     </a>
                 </li>

@@ -1,7 +1,10 @@
 package com.longder.edusys.controller;
 
+import com.longder.edusys.entity.dto.ExamResultDto;
+import com.longder.edusys.entity.enums.ExamType;
 import com.longder.edusys.entity.po.Chapter;
 import com.longder.edusys.entity.po.ExamPaper;
+import com.longder.edusys.entity.po.ExamResult;
 import com.longder.edusys.entity.po.SysUser;
 import com.longder.edusys.security.SecurityUtil;
 import com.longder.edusys.service.ChapterManageService;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
+import java.security.Security;
 import java.util.List;
 
 /**
@@ -95,5 +99,40 @@ public class ClassExamController {
         ExamPaper examPaper = examManageService.getOneExamPaper(paperId);
         model.addAttribute("exam",examPaper);
         return "exam/exam-paper";
+    }
+
+    /**
+     * 考试结果列表，学生用
+     * @return
+     */
+    @GetMapping("/result")
+    public String resultList(Model model){
+        SysUser student = SecurityUtil.getCurrentUser();
+        List<ExamResult> resultList = examManageService.listExamResultForStudent(student.getId(), ExamType.NORMAL);
+        model.addAttribute("resultList",resultList);
+        return "classExam/result-list";
+    }
+
+    /**
+     * 教师查看某个考试的所有学生考试结果列表
+     * @return
+     */
+    @GetMapping("/resultForTeacher/{examPaperId}")
+    public String resultListForTeacher(Model model,@PathVariable("examPaperId") Long examPaperId){
+        List<ExamResult> resultList = examManageService.listExamResultByPaperId(examPaperId);
+        model.addAttribute("resultList",resultList);
+        return "classExam/result-list-by-paper";
+    }
+
+    /**
+     * 考试结果查看
+     * @param resultId
+     * @return
+     */
+    @GetMapping("/resultDetail/{resultId}")
+    public String resultDetail(@PathVariable("resultId") Long resultId,Model model){
+        ExamResultDto dto = examManageService.getExamResultDetail(resultId);
+        model.addAttribute("dto",dto);
+        return "classExam/result-detail";
     }
 }

@@ -41,14 +41,14 @@
             <div class="form-group">
                 <input type="text" class="form-control" placeholder="验证码" name="validCode">
             </div>
-            <div class="form-group">
-                <label class="checkbox-inline i-checks">
-                    <input name="role" type="radio" value="ROLE_ADMIN" checked>管理员</label>
-                <label class="checkbox-inline i-checks">
-                    <input name="role" type="radio" value="ROLE_STUDENT">学生</label>
-                <label class="checkbox-inline i-checks">
-                    <input name="role" type="radio" value="ROLE_TEACHER">教师</label>
-            </div>
+<!--            <div class="form-group">-->
+<!--                <label class="checkbox-inline i-checks">-->
+<!--                    <input name="role" type="radio" value="ROLE_ADMIN" checked>管理员</label>-->
+<!--                <label class="checkbox-inline i-checks">-->
+<!--                    <input name="role" type="radio" value="ROLE_STUDENT">学生</label>-->
+<!--                <label class="checkbox-inline i-checks">-->
+<!--                    <input name="role" type="radio" value="ROLE_TEACHER">教师</label>-->
+<!--            </div>-->
             <span class="text-danger" th:if="${session[SPRING_SECURITY_LAST_EXCEPTION]!=null}"
                 th:text="${session[SPRING_SECURITY_LAST_EXCEPTION].message}">
                 Error Message

@@ -45,7 +45,13 @@ public class ExamManageController {
      */
     @PostMapping("/complete")
     public String completeExam(ExamSubmitDto dto){
+
         examManageService.completeExam(dto);
+        if(dto.getExamType() == ExamType.SELF){
+            return "redirect:/admin/selfExam/list";
+        }else if(dto.getExamType() == ExamType.NORMAL){
+            return "redirect:/admin/classExam/result";
+        }
         return "redirect:/admin/selfExam/list";
     }
 }

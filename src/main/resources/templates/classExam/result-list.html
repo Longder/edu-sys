@@ -8,7 +8,7 @@
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>已发布的考试</h5>
+                    <h5>自我测验结果</h5>
                     <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
@@ -28,28 +28,21 @@
                             <tr>
                                 <th>序号</th>
                                 <th>试卷名称</th>
-                                <th>所属班级</th>
-                                <th>创建时间</th>
-                                <th>参考学生数</th>
+                                <th>完成时间</th>
+                                <th>得分</th>
                                 <th>操作</th>
                             </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="paper:${paperList}">
-                                    <td th:text="${paperStat.index+1}"></td>
-                                    <td th:text="${paper.name}"></td>
-                                    <td th:text="${paper.gradeClass.name}"></td>
-                                    <td th:text="${paper.createTimeStr}"></td>
-                                    <td th:text="${paper.studentCount}"></td>
-                                    <td>
-                                        <a class="btn btn-sm btn-primary" th:href="@{'/admin/classExam/detail/'+${paper.id}}">
-                                            查看试卷详情
-                                        </a>
-                                        <a class="btn btn-sm btn-warning" th:href="@{'/admin/classExam/resultForTeacher/'+${paper.id}}">
-                                            查看考试结果
-                                        </a>
-                                    </td>
-                                </tr>
+                            <tr th:each="result:${resultList}">
+                                <td th:text="${resultStat.index+1}"></td>
+                                <td th:text="${result.examPaperName}"></td>
+                                <td th:text="${result.completeTimeStr}"></td>
+                                <td th:text="${result.score}"></td>
+                                <td>
+                                    <a th:href="@{'/admin/classExam/resultDetail/'+${result.id}}" class="btn btn-primary">查看详情</a>
+                                </td>
+                            </tr>
                             </tbody>
                         </table>
                     </div>

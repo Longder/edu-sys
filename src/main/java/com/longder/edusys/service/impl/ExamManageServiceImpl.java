@@ -39,6 +39,8 @@ public class ExamManageServiceImpl implements ExamManageService {
     private ExamResultRepository examResultRepository;
     @Resource
     private ResultDetailRepository resultDetailRepository;
+    @Resource
+    private SysUserRepository sysUserRepository;
 
     /**
      * 生成考试
@@ -211,5 +213,25 @@ public class ExamManageServiceImpl implements ExamManageService {
         //封装
         examPaper.setDetailList(paperDetailList);
         return examPaper;
+    }
+
+    /**
+     * 根据试卷查询此试卷的考试结果，包括所有学生的
+     *
+     * @param examPaperId
+     * @return
+     */
+    @Override
+    public List<ExamResult> listExamResultByPaperId(Long examPaperId) {
+        List<ExamResult> resultList = examResultRepository.listByExamPaperId(examPaperId);
+        //处理时间展示和学生姓名
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        resultList.forEach(examResult -> {
+            examResult.setCompleteTimeStr(formatter.format(examResult.getCompleteTime()));
+            SysUser student = sysUserRepository.getOne(examResult.getStudentId());
+            examResult.setStudentName(student.getName());
+        });
+
+        return resultList;
     }
 }

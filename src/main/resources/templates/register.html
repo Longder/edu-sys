@@ -181,6 +181,10 @@
             checkboxClass: 'icheckbox_square-green',
             radioClass: 'iradio_square-green',
         });
+        //验证码刷新
+        $("#captcha").click(function(){
+            $("#captcha").attr("src","/getCaptcha?num="+Math.random());
+        });
     });
 </script>
 </body>

@@ -63,6 +63,17 @@ public interface ExamResultRepository {
      * @param examPaperId
      * @return
      */
-    @Select("SELECT COUNT(id_) FROM EXAM_RESULT where student_id_ = 3 and exam_paper_id_ = 13")
+    @Select("SELECT COUNT(id_) FROM EXAM_RESULT where student_id_ = #{studentId} and exam_paper_id_ = #{examPaperId}")
     Integer countByStudentIdAndExamPaperId(@Param("studentId") Long studentId,@Param("examPaperId")Long examPaperId);
+
+    /**
+     * 根据试卷id查询考试结果
+     * @param examPaperId
+     * @return
+     */
+    @ResultMap("com.longder.edusys.repository.ExamResultRepository.ExamResultResultMap")
+    @Select("SELECT ER.id_,ER.exam_paper_id_, ER.student_id_,ER.score_,ER.complete_time_,EP.name_ as examPaperName  FROM EXAM_RESULT ER " +
+            "    LEFT JOIN EXAM_PAPER EP on ER.exam_paper_id_ = EP.id_" +
+            "    WHERE EP.id_ = #{examPaperId}")
+    List<ExamResult> listByExamPaperId(@Param("examPaperId")Long examPaperId);
 }
