@@ -53,4 +53,22 @@ public class ClassManageController {
         classManageService.addClass(gradeClass);
         return "redirect:/admin/class/list";
     }
+
+    /**
+     * 去编辑班级
+     * @param classId
+     * @param model
+     * @return
+     */
+    @GetMapping("/toEdit")
+    public String toEditClass(Long classId,Model model){
+        model.addAttribute("gradeClass",classManageService.getOneClass(classId));
+        return "class/edit-class-modal";
+    }
+
+    @PostMapping("/edit")
+    public String editClass(GradeClass gradeClass){
+        classManageService.editOneClass(gradeClass);
+        return "redirect:/admin/class/list";
+    }
 }

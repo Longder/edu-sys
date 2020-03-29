@@ -50,9 +50,11 @@
                             <td th:text="${class.name}"></td>
                             <td th:text="${class.description}"></td>
                             <td>
-                                <a href="#" class="btn btn-sm btn-danger">
-                                    操作
-                                </a>
+                                <button data-toggle="modal" class="btn btn-sm btn-warning"
+                                        data-target="#classModal"
+                                        th:onclick="'openModal(\'/admin/class/toEdit?classId='+${class.id}+'\',\'classModal\')'">
+                                    编辑
+                                </button>
                             </td>
                         </tr>
                         </tbody>

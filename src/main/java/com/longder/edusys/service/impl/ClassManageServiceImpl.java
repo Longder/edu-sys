@@ -46,4 +46,26 @@ public class ClassManageServiceImpl implements ClassManageService {
     public void addClass(GradeClass gradeClass) {
         gradeClassRepository.insert(gradeClass);
     }
+
+    /**
+     * 获取一个班级信息
+     *
+     * @param classId
+     * @return
+     */
+    @Override
+    public GradeClass getOneClass(Long classId) {
+        return gradeClassRepository.getOne(classId);
+    }
+
+    /**
+     * 编辑一个班级
+     *
+     * @param gradeClass
+     */
+    @Override
+    @Transactional
+    public void editOneClass(GradeClass gradeClass) {
+        gradeClassRepository.update(gradeClass);
+    }
 }

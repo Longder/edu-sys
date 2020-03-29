@@ -28,4 +28,16 @@ public interface ClassManageService {
      */
     void addClass(GradeClass gradeClass);
 
+    /**
+     * 获取一个班级信息
+     * @param classId
+     * @return
+     */
+    GradeClass getOneClass(Long classId);
+
+    /**
+     * 编辑一个班级
+     * @param gradeClass
+     */
+    void editOneClass(GradeClass gradeClass);
 }
