@@ -58,4 +58,28 @@ public class QuestionManageController {
         questionManageService.addOneQuestion(question);
         return "redirect:/admin/question/list";
     }
+
+    /**
+     * 去编辑习题
+     * @param model
+     * @return
+     */
+    @GetMapping("/toEdit")
+    public String toEditQuestion(Model model,Long questionId){
+        model.addAttribute("questionTypes", QuestionType.values());
+        model.addAttribute("chapterList",chapterManageService.listAllChapter());
+        model.addAttribute("question",questionManageService.getOneQuestion(questionId));
+        return "question/edit-question-modal";
+    }
+
+    /**
+     * 编辑一个习题
+     * @param question
+     * @return
+     */
+    @PostMapping("/edit")
+    public String editQuestion(Question question){
+        questionManageService.editOneQuestion(question);
+        return "redirect:/admin/question/list";
+    }
 }

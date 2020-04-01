@@ -44,23 +44,23 @@
                             <div class="col-sm-10">
                                 <label class="checkbox-inline i-checks">
                                     <input id="all-radio" name="chooseWay" type="radio" readonly value="ALL" checked>全章节随机</label>
-<!--                                <label class="checkbox-inline i-checks">-->
-<!--                                    <input id="assign-radio" name="chooseWay" type="radio" value="ASSIGN">指定章节</label>-->
+                                <label class="checkbox-inline i-checks">
+                                    <input id="assign-radio" name="chooseWay" type="radio" value="ASSIGN">指定章节</label>
                             </div>
                         </div>
-<!--                        <div class="hr-line-dashed"></div>-->
-<!--                        <div class="form-group" id="chapter-select" style="display: none">-->
-<!--                            <label class="col-sm-2 control-label">-->
-<!--                                选择章节：-->
-<!--                            </label>-->
-<!--                            <div class="col-sm-10" style="padding-top: 10px;">-->
-<!--                                <div class="i-checks" th:each="chapter:${chapterList}">-->
-<!--                                    <label>-->
-<!--                                        <input name="chapterIds" type="checkbox" th:value="${chapter.id}"> <i></i> <span th:text="${chapter.subjectTitle}"></span>-->
-<!--                                    </label>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group" id="chapter-select" style="display: none">
+                            <label class="col-sm-2 control-label">
+                                选择章节：
+                            </label>
+                            <div class="col-sm-10" style="padding-top: 10px;">
+                                <div class="i-checks" th:each="chapter:${chapterList}">
+                                    <label>
+                                        <input name="chapterIds" type="checkbox" th:value="${chapter.id}"> <i></i> <span th:text="${chapter.subjectTitle}"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
                         <div class="hr-line-dashed"></div>
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-2">

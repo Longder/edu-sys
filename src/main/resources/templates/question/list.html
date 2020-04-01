@@ -55,9 +55,11 @@
                             <td th:text="${question.answer}"></td>
                             <td th:text="${question.score}"></td>
                             <td>
-                                <a href="#" class="btn btn-sm btn-warning">
-                                    操作
-                                </a>
+                                <button data-toggle="modal" class="btn btn-sm btn-warning"
+                                        data-target="#questionModal"
+                                        th:onclick="'openModal(\'/admin/question/toEdit?questionId='+${question.id}+'\',\'questionModal\')'">
+                                    编辑
+                                </button>
                             </td>
                         </tr>
                         </tbody>

@@ -54,5 +54,16 @@ public class TeacherManageServiceImpl implements TeacherManageService {
         sysUserRepository.update(dbTeacher);
     }
 
+    /**
+     * 删除一个教师
+     *
+     * @param teacherId
+     */
+    @Override
+    @Transactional
+    public void deleteOneTeacher(Long teacherId) {
+        sysUserRepository.deleteById(teacherId);
+    }
+
 
 }

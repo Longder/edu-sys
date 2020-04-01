@@ -27,4 +27,10 @@ public interface TeacherManageService {
      * @param teacher
      */
     void editTeacher(SysUser teacher);
+
+    /**
+     * 删除一个教师
+     * @param teacherId
+     */
+    void deleteOneTeacher(Long teacherId);
 }

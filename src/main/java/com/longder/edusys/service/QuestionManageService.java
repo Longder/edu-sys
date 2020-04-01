@@ -18,6 +18,12 @@ public interface QuestionManageService {
     void addOneQuestion(Question question);
 
     /**
+     * 编辑一个习题
+     * @param question
+     */
+    void editOneQuestion(Question question);
+
+    /**
      * 查询所有习题
      * @return
      */

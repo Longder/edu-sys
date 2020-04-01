@@ -22,21 +22,4 @@ public interface UserManageService {
      */
     Boolean checkLoginName(String loginName);
 
-    /**
-     * 普通用户的列表
-     * @return
-     */
-    List<SysUser> listCommonUser();
-
-    /**
-     * 删除一个用户
-     * @param userId
-     */
-    void deleteUser(Long userId);
-
-    /**
-     * 修改密码
-     * @param newPassword
-     */
-    void changePassword(String newPassword);
 }

@@ -1,10 +1,7 @@
 package com.longder.edusys.repository;
 
 import com.longder.edusys.entity.po.Question;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -18,6 +15,10 @@ public interface QuestionRepository {
     @Insert("INSERT INTO QUESTION(content_, type_, score_, answer_, chapter_id_, choice_A_, choice_B_, choice_C_, choice_D_) " +
             "VALUES(#{content},#{type.name},#{score},#{answer},#{chapterId},#{choiceA},#{choiceB},#{choiceC},#{choiceD})")
     void insert(Question question);
+
+    @Update("UPDATE QUESTION SET content_ = #{content},type_ = #{type.name},answer_ = #{answer},choice_A_ = #{choiceA},choice_B_=#{choiceB},choice_C_=#{choiceC},choice_D_=#{choiceD} " +
+            " WHERE id_ = #{id}")
+    void update(Question question);
 
     /**
      * 查询所有题目

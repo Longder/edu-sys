@@ -5,6 +5,7 @@ import com.longder.edusys.service.TeacherManageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -54,6 +55,17 @@ public class TeacherManageController {
     @PostMapping("/edit")
     public String editTeacher(SysUser teacher){
         teacherManageService.editTeacher(teacher);
+        return "redirect:/admin/teacher/list";
+    }
+
+    /**
+     * 删除教师
+     * @param teacherId
+     * @return
+     */
+    @GetMapping("/delete/{teacherId}")
+    public String deleteTeacher(@PathVariable("teacherId") Long teacherId){
+        teacherManageService.deleteOneTeacher(teacherId);
         return "redirect:/admin/teacher/list";
     }
 

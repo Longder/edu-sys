@@ -56,40 +56,4 @@ public class UserManageServiceImpl implements UserManageService {
         SysUser sysUser = sysUserRepository.getByLoginName(loginName);
         return ObjectUtils.isEmpty(sysUser);
     }
-
-
-    /**
-     * 普通用户的列表
-     *
-     * @return
-     */
-    @Override
-    public List<SysUser> listCommonUser() {
-        return sysUserRepository.listCommonUser();
-    }
-
-    /**
-     * 删除一个用户
-     *
-     * @param userId
-     */
-    @Override
-    @Transactional
-    public void deleteUser(Long userId) {
-        sysUserRepository.deleteById(userId);
-    }
-
-    /**
-     * 修改密码
-     *
-     * @param newPassword
-     */
-    @Override
-    @Transactional
-    public void changePassword(String newPassword) {
-        SysUser sysUser = SecurityUtil.getCurrentUser();
-        assert sysUser != null;
-        sysUser.setPassword(EncryptionUtil.encrypt(newPassword.trim()));
-        sysUserRepository.update(sysUser);
-    }
 }

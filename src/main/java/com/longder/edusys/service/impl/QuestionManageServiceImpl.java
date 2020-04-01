@@ -34,6 +34,18 @@ public class QuestionManageServiceImpl implements QuestionManageService {
     }
 
     /**
+     * 编辑一个习题
+     *
+     * @param question
+     */
+    @Override
+    @Transactional
+    public void editOneQuestion(Question question) {
+        questionRepository.update(question);
+    }
+
+
+    /**
      * 查询所有习题
      *
      * @return
@@ -77,7 +89,10 @@ public class QuestionManageServiceImpl implements QuestionManageService {
      */
     @Override
     public Question getOneQuestion(Long questionId) {
-        return questionRepository.getOne(questionId);
+        Question question = questionRepository.getOne(questionId);
+        //封装章节标题
+        question.getChapter().generateSubjectTitle();
+        return question;
     }
 
     /**

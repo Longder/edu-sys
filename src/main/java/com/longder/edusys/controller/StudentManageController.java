@@ -5,6 +5,7 @@ import com.longder.edusys.service.StudentManageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -41,9 +42,26 @@ public class StudentManageController {
         return "student/edit-student-modal";
     }
 
+    /**
+     * 编辑学生的表单提交
+     * @param student
+     * @return
+     */
     @PostMapping("/edit")
     public String editStudent(SysUser student){
         studentManageService.editStudent(student);
         return "redirect:/admin/student/list";
     }
+
+    /**
+     * 删除学生
+     * @param studentId
+     * @return
+     */
+    @GetMapping("/delete/{studentId}")
+    public String deleteStudent(@PathVariable("studentId") Long studentId){
+        studentManageService.deleteOneStudent(studentId);
+        return "redirect:/admin/student/list";
+    }
+
 }

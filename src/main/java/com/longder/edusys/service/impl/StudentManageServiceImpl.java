@@ -1,6 +1,8 @@
 package com.longder.edusys.service.impl;
 
 import com.longder.edusys.entity.po.SysUser;
+import com.longder.edusys.repository.ExamPaperRepository;
+import com.longder.edusys.repository.ExamResultRepository;
 import com.longder.edusys.repository.SysUserRepository;
 import com.longder.edusys.service.StudentManageService;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,10 @@ public class StudentManageServiceImpl implements StudentManageService {
 
     @Resource
     private SysUserRepository sysUserRepository;
+    @Resource
+    private ExamPaperRepository examPaperRepository;
+    @Resource
+    private ExamResultRepository examResultRepository;
 
     /**
      * 查询所有学生
@@ -52,5 +58,20 @@ public class StudentManageServiceImpl implements StudentManageService {
         dbStudent.setName(student.getName());
         dbStudent.setEmail(student.getEmail());
         sysUserRepository.update(dbStudent);
+    }
+
+    /**
+     * 删除一个学生
+     * @param studentId
+     */
+    @Override
+    @Transactional
+    public void deleteOneStudent(Long studentId) {
+        //删除考试结果
+        examResultRepository.deleteByStudentId(studentId);
+        //删除自测试卷
+        examPaperRepository.deleteByStudentId(studentId);
+        //删除学生
+        sysUserRepository.deleteById(studentId);
     }
 }

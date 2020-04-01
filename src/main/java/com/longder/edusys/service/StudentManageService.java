@@ -27,4 +27,10 @@ public interface StudentManageService {
      * @param student
      */
     void editStudent(SysUser student);
+
+    /**
+     * 删除一个学生
+     * @param studentId
+     */
+    void deleteOneStudent(Long studentId);
 }

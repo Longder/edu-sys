@@ -76,4 +76,11 @@ public interface ExamResultRepository {
             "    LEFT JOIN EXAM_PAPER EP on ER.exam_paper_id_ = EP.id_" +
             "    WHERE EP.id_ = #{examPaperId}")
     List<ExamResult> listByExamPaperId(@Param("examPaperId")Long examPaperId);
+
+    /**
+     * 根据学生id删除考试结果
+     * @param studentId
+     */
+    @Delete("DELETE FROM EXAM_RESULT WHERE student_id_ = #{studentId}")
+    void deleteByStudentId(@Param("studentId") Long studentId);
 }
