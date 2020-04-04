@@ -46,4 +46,11 @@ public interface ResultDetailRepository {
     @Select("SELECT question_id_,count(id_) as count_ FROM result_detail WHERE student_id_ = #{studentId} AND correct_ = 0" +
             "    GROUP BY question_id_")
     List<QuestionCountDto> countWrongQuestionByStudentId(@Param("studentId") Long studentId);
+
+    /**
+     * 根据班级id删除
+     * @param classId
+     */
+    @Delete("DELETE FROM RESULT_DETAIL WHERE exam_paper_id_ IN (SELECT id_ FROM EXAM_PAPER WHERE grade_class_id_ = #{classId})")
+    void deleteByGradeClassId(@Param("classId") Long classId);
 }

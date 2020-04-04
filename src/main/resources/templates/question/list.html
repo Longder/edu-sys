@@ -60,6 +60,8 @@
                                         th:onclick="'openModal(\'/admin/question/toEdit?questionId='+${question.id}+'\',\'questionModal\')'">
                                     编辑
                                 </button>
+                                <a onclick="return confirm('确定删除此题目吗？')" class="btn btn-sm btn-danger"
+                                   th:href="@{'/admin/question/delete/'+${question.id}}">删除</a>
                             </td>
                         </tr>
                         </tbody>

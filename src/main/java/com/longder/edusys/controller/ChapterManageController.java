@@ -6,6 +6,7 @@ import com.longder.edusys.service.ChapterManageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -50,6 +51,17 @@ public class ChapterManageController {
     @PostMapping("/add")
     public String addChapter(Chapter chapter){
         chapterManageService.addOneChapter(chapter);
+        return "redirect:/admin/chapter/list";
+    }
+
+    /**
+     * 删除章节
+     * @param chapterId
+     * @return
+     */
+    @GetMapping("/delete/{chapterId}")
+    public String deleteChapter(@PathVariable("chapterId") Long chapterId){
+        chapterManageService.deleteOneChapter(chapterId);
         return "redirect:/admin/chapter/list";
     }
 }

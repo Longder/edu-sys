@@ -34,4 +34,12 @@ public interface PaperDetailRepository {
             "    LEFT JOIN QUESTION Q on PD.question_id_ = Q.id_ " +
             "    WHERE exam_paper_id_ = #{examPaperId}")
     List<PaperDetail> listByExamPaperId(@Param("examPaperId") Long examPaperId);
+
+    /**
+     * 根据班级id删除
+     * @param classId
+     */
+    @Delete("DELETE FROM PAPER_DETAIL WHERE exam_paper_id_ IN (SELECT id_ FROM EXAM_PAPER WHERE grade_class_id_ = #{classId})")
+    void deleteByGradeClassId(@Param("classId")Long classId);
 }
+

@@ -40,6 +40,7 @@
                             <th>序号</th>
                             <th>所属学科</th>
                             <th>章节标题</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -47,6 +48,10 @@
                                 <td th:text="${chapterStat.index+1}"></td>
                                 <td th:text="${chapter.subject}"></td>
                                 <td th:text="${chapter.title}"></td>
+                                <td>
+                                    <a onclick="return confirm('确定删除此章节和所有的关联题目吗？')" class="btn btn-sm btn-danger"
+                                       th:href="@{'/admin/chapter/delete/'+${chapter.id}}">删除</a>
+                                </td>
                             </tr>
                         </tbody>
                     </table>

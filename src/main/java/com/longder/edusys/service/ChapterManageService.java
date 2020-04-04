@@ -27,4 +27,10 @@ public interface ChapterManageService {
      * @return
      */
     Chapter getOneChapter(Long chapterId);
+
+    /**
+     * 删除一个章节和它的关联数据
+     * @param chapterId
+     */
+    void deleteOneChapter(Long chapterId);
 }

@@ -40,4 +40,12 @@ public interface ExamPaperRepository {
      */
     @Delete("DELETE FROM exam_paper WHERE student_id_ = #{studentId}")
     void deleteByStudentId(@Param("studentId") Long studentId);
+
+
+    /**
+     * 根据班级删除
+     * @param classId
+     */
+    @Delete("DELETE FROM EXAM_PAPER WHERE grade_class_id_ = #{classId}")
+    void deleteByGradeClassId(@Param("classId") Long classId);
 }

@@ -8,6 +8,7 @@ import com.longder.edusys.service.QuestionManageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -80,6 +81,17 @@ public class QuestionManageController {
     @PostMapping("/edit")
     public String editQuestion(Question question){
         questionManageService.editOneQuestion(question);
+        return "redirect:/admin/question/list";
+    }
+
+    /**
+     * 删除习题
+     * @param questionId
+     * @return
+     */
+    @GetMapping("/delete/{questionId}")
+    public String deleteQuestion(@PathVariable("questionId") Long questionId){
+        questionManageService.deleteOneQuestion(questionId);
         return "redirect:/admin/question/list";
     }
 }

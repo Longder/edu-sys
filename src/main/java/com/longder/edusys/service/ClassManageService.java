@@ -40,4 +40,10 @@ public interface ClassManageService {
      * @param gradeClass
      */
     void editOneClass(GradeClass gradeClass);
+
+    /**
+     * 删除一个班级以及所有关联信息
+     * @param classId
+     */
+    void deleteOneClass(Long classId);
 }

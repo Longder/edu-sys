@@ -119,6 +119,17 @@ public class QuestionManageServiceImpl implements QuestionManageService {
     }
 
     /**
+     * 删除一个题目
+     *
+     * @param questionId
+     */
+    @Override
+    @Transactional
+    public void deleteOneQuestion(Long questionId) {
+        questionRepository.deleteById(questionId);
+    }
+
+    /**
      * 随机选题20次
      *
      * @return

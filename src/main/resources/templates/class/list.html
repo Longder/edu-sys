@@ -55,6 +55,8 @@
                                         th:onclick="'openModal(\'/admin/class/toEdit?classId='+${class.id}+'\',\'classModal\')'">
                                     编辑
                                 </button>
+                                <a onclick="return confirm('确定删除此班级和所有关联的教师学生吗？')" class="btn btn-sm btn-danger"
+                                   th:href="@{'/admin/class/delete/'+${class.id}}">删除</a>
                             </td>
                         </tr>
                         </tbody>

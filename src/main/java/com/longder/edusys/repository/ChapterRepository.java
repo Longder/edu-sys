@@ -1,10 +1,7 @@
 package com.longder.edusys.repository;
 
 import com.longder.edusys.entity.po.Chapter;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -35,4 +32,7 @@ public interface ChapterRepository {
     @ResultMap("com.longder.edusys.repository.ChapterRepository.ChapterResultMap")
     @Select("SELECT * FROM CHAPTER WHERE id_ = #{id}")
     Chapter getOne(Long id);
+
+    @Delete("DELETE FROM CHAPTER WHERE id_ = #{id}")
+    void deleteById(@Param("id") Long id);
 }

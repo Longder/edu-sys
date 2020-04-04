@@ -83,4 +83,12 @@ public interface ExamResultRepository {
      */
     @Delete("DELETE FROM EXAM_RESULT WHERE student_id_ = #{studentId}")
     void deleteByStudentId(@Param("studentId") Long studentId);
+
+    /**
+     * 根据班级id删除考试结果
+     * @param classId
+     */
+    @Delete("DELETE FROM EXAM_RESULT WHERE exam_paper_id_ " +
+            "   in (SELECT id_ FROM EXAM_PAPER WHERE grade_class_id_ = #{classId})")
+    void deleteByGradeCLassId(@Param("classId") Long classId);
 }

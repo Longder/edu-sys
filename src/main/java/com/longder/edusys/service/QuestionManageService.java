@@ -57,4 +57,9 @@ public interface QuestionManageService {
      */
     List<QuestionWrongCountListVo> listWrongQuestionCount(Long studentId);
 
+    /**
+     * 删除一个题目
+     * @param questionId
+     */
+    void deleteOneQuestion(Long questionId);
 }

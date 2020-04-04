@@ -78,4 +78,11 @@ public interface SysUserRepository {
             "    WHERE SUR.role_ = #{role}")
     List<SysUser> listByRole(String role);
 
+    /**
+     * 根据班级删除用户
+     * @param classId
+     */
+    @Delete("DELETE FROM SYS_USER WHERE grade_class_id_ = #{classId}")
+    void deleteByClassId(@Param("classId") Long classId);
+
 }

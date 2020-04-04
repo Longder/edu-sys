@@ -43,4 +43,11 @@ public interface GradeClassRepository {
      */
     @Update("UPDATE GRADE_CLASS SET name_ = #{name},description_ = #{description} where id_ = #{id}")
     void update(GradeClass gradeClass);
+
+    /**
+     * 根据id删除
+     * @param id
+     */
+    @Delete("delete from GRADE_CLASS where id_ = #{id}")
+    void deleteById(@Param("id") Long id);
 }

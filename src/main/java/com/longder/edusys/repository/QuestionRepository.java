@@ -50,4 +50,18 @@ public interface QuestionRepository {
     @Select("SELECT Q.id_ AS q_id,Q.content_ as q_content,Q.*,C.id_ as c_id,c.content_ as c_content,c.* " +
             "    FROM QUESTION Q LEFT JOIN CHAPTER C on Q.chapter_id_ = C.id_ WHERE Q.id_ = #{questionId}")
     Question getOne(Long questionId);
+
+    /**
+     * 根据章节id删除
+     * @param chapterId
+     */
+    @Delete("DELETE FROM QUESTION WHERE chapter_id_ = #{chapterId}")
+    void deleteByChapterId(@Param("chapterId") Long chapterId);
+
+    /**
+     * 根据id删除题目
+     * @param id
+     */
+    @Delete("DELETE from QUESTION where id_ = #{id_}")
+    void deleteById(@Param("id_") Long id);
 }
