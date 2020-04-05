@@ -22,7 +22,7 @@ public interface ExamPaperRepository {
      * @param examPaper
      */
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    @Insert("INSERT INTO exam_paper(nam«e_,grade_class_id_,exam_type_,student_id_,create_time_) VALUES(#{name},#{gradeClass.id},#{examType},#{student.id},#{createTime})")
+    @Insert("INSERT INTO exam_paper(name_,grade_class_id_,exam_type_,student_id_,create_time_) VALUES(#{name},#{gradeClass.id},#{examType},#{student.id},#{createTime})")
     void insert(ExamPaper examPaper);
 
     /**
