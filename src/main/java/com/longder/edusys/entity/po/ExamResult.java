@@ -46,4 +46,5 @@ public class ExamResult extends BaseIdEntity {
      * 参考学生姓名，展示用
      */
     private String studentName;
+
 }

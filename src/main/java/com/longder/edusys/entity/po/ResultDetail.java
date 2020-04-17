@@ -16,7 +16,7 @@ public class ResultDetail extends BaseIdEntity{
     private Long studentId;
 
     /**
-     * 考试详情id
+     * 考试结果id
      */
     private Long examResultId;
 
