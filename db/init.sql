@@ -47,7 +47,6 @@ create table EXAM_PAPER
     name_ varchar(255) null,
     grade_class_id_ bigint null,
     student_id_ bigint null,
-    exam_type_ varchar(255) null,
     create_time_ datetime,
     constraint exam_paper_pk
         primary key (id_)
@@ -94,20 +93,6 @@ create table RESULT_DETAIL
     comment '结果详情';
 
 
-drop table if exists CHAPTER;
-create table CHAPTER
-(
-    id_ bigint auto_increment,
-    subject_ varchar(255),
-    name_ varchar(255),
-    title_ varchar(255),
-    content_ varchar(255),
-    study_plan_ varchar(255),
-        primary key (id_)
-)
-    comment '学科章节';
-
-
 drop table if exists QUESTION;
 create table QUESTION
 (
@@ -115,8 +100,7 @@ create table QUESTION
     content_ text null comment '题目内容',
     type_ varchar(100) null,
     score_ decimal null comment '分数',
-    answer_ varchar(100) null,
-    chapter_id_ bigint comment '试题所属章节',
+    answer_ varchar(100) null
     choice_A_ varchar(100),
     choice_B_ varchar(100),
     choice_C_ varchar(100),

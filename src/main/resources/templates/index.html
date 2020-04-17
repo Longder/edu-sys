@@ -46,7 +46,7 @@
                         <span class="nav-label">学生管理</span>
                     </a>
                 </li>
-                <li sec:authorize="hasRole('ROLE_ADMIN')">
+                <li sec:authorize="hasRole('ROLE_TEACHER')">
                     <a class="J_menuItem" th:href="@{/admin/question/list}" title="习题管理">
                         <i class="fa fa-clone"></i>
                         <span class="nav-label">习题管理</span>
@@ -132,7 +132,7 @@
                     data-id="dashboard"></iframe>
         </div>
         <div class="footer">
-            <div class="pull-right">&copy; 2019 <a href="#" target="_blank">有心人出品</a>
+            <div class="pull-right">&copy; 2019 <a href="#" target="_blank">版权所有</a>
             </div>
         </div>
     </div>

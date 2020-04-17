@@ -32,7 +32,7 @@ public interface ResultDetailRepository {
      */
     @ResultMap("com.longder.edusys.repository.ResultDetailRepository.ResultDetailResultMap")
     @Select("SELECT RD.id_ AS rd_id, student_id_, exam_result_id_, exam_paper_id_, question_id_, RD.answer_ as rd_answer, correct_, " +
-            "       Q.id_ AS q_id, content_, type_, score_, Q.answer_ as q_answer, chapter_id_, choice_A_, choice_B_, choice_C_, choice_D_ " +
+            "       Q.id_ AS q_id, content_, type_, score_, Q.answer_ as q_answer, choice_A_, choice_B_, choice_C_, choice_D_ " +
             "       FROM RESULT_DETAIL RD" +
             "    LEFT JOIN question q on rd.question_id_ = q.id_ WHERE RD.exam_result_id_ = #{examResultId}")
     List<ResultDetail> listByExamResultId(@Param("examResultId") Long examResultId);
