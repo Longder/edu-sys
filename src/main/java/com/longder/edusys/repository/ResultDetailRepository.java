@@ -38,16 +38,6 @@ public interface ResultDetailRepository {
     List<ResultDetail> listByExamResultId(@Param("examResultId") Long examResultId);
 
     /**
-     * 统计错题
-     * @param studentId
-     * @return
-     */
-    @ResultMap("com.longder.edusys.repository.ResultDetailRepository.QuestionCountResultMap")
-    @Select("SELECT question_id_,count(id_) as count_ FROM result_detail WHERE student_id_ = #{studentId} AND correct_ = 0" +
-            "    GROUP BY question_id_")
-    List<QuestionCountDto> countWrongQuestionByStudentId(@Param("studentId") Long studentId);
-
-    /**
      * 根据班级id删除
      * @param classId
      */
