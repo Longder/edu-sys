@@ -1,7 +1,6 @@
 package com.longder.edusys.service;
 
 import com.longder.edusys.entity.po.Question;
-import com.longder.edusys.entity.vo.QuestionWrongCountListVo;
 
 import java.util.List;
 
@@ -36,26 +35,11 @@ public interface QuestionManageService {
     List<Question> randomAllQuestion();
 
     /**
-     * 在指定章节中选题
-     * @param chapterIds
-     * @return
-     */
-    List<Question> randomAssignQuestion(List<Long> chapterIds);
-
-    /**
      * 查询获取一个题目
      * @param questionId
      * @return
      */
     Question getOneQuestion(Long questionId);
-
-
-    /**
-     * 错题统计列表展示
-     * @param studentId
-     * @return
-     */
-    List<QuestionWrongCountListVo> listWrongQuestionCount(Long studentId);
 
     /**
      * 删除一个题目

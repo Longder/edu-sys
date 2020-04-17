@@ -20,11 +20,6 @@ public class ExamSubmitDto implements Serializable {
     private Long examId;
 
     /**
-     * 考试类型
-     */
-    private ExamType examType;
-
-    /**
      * 考试结果
      */
     private List<ResultDetail> detailList;

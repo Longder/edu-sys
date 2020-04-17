@@ -14,7 +14,7 @@ public class ExamResultRepositoryTest extends BaseTest {
 
     @Test
     public void testList(){
-        List<ExamResult> resultList = examResultRepository.listByStudentIdAndExamType(3L, ExamType.SELF);
+        List<ExamResult> resultList = examResultRepository.listByStudentId(3L);
         System.out.println(resultList.size());
     }
 }

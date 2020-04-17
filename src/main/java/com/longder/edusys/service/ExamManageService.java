@@ -32,7 +32,7 @@ public interface ExamManageService {
      * 区分自测考试还是正常考试
      * @return
      */
-    List<ExamResult> listExamResultForStudent(Long studentId, ExamType examType);
+    List<ExamResult> listExamResultForStudent(Long studentId);
 
     /**
      * 获取考试详情

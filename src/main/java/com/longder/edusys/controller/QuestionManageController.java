@@ -2,8 +2,6 @@ package com.longder.edusys.controller;
 
 import com.longder.edusys.entity.enums.QuestionType;
 import com.longder.edusys.entity.po.Question;
-import com.longder.edusys.repository.QuestionRepository;
-import com.longder.edusys.service.ChapterManageService;
 import com.longder.edusys.service.QuestionManageService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +20,6 @@ import java.util.List;
 @RequestMapping("/admin/question")
 public class QuestionManageController {
 
-    @Resource
-    private ChapterManageService chapterManageService;
     @Resource
     private QuestionManageService questionManageService;
 
@@ -45,7 +41,6 @@ public class QuestionManageController {
     @GetMapping("/toAdd")
     public String toAddQuestion(Model model){
         model.addAttribute("questionTypes", QuestionType.values());
-        model.addAttribute("chapterList",chapterManageService.listAllChapter());
         return "question/add-question-modal";
     }
 
@@ -68,7 +63,6 @@ public class QuestionManageController {
     @GetMapping("/toEdit")
     public String toEditQuestion(Model model,Long questionId){
         model.addAttribute("questionTypes", QuestionType.values());
-        model.addAttribute("chapterList",chapterManageService.listAllChapter());
         model.addAttribute("question",questionManageService.getOneQuestion(questionId));
         return "question/edit-question-modal";
     }

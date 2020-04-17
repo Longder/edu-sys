@@ -1,8 +1,6 @@
 package com.longder.edusys.service.impl;
 
-import com.longder.edusys.entity.dto.QuestionCountDto;
 import com.longder.edusys.entity.po.Question;
-import com.longder.edusys.entity.vo.QuestionWrongCountListVo;
 import com.longder.edusys.repository.QuestionRepository;
 import com.longder.edusys.repository.ResultDetailRepository;
 import com.longder.edusys.service.QuestionManageService;
@@ -19,8 +17,6 @@ public class QuestionManageServiceImpl implements QuestionManageService {
 
     @Resource
     private QuestionRepository questionRepository;
-    @Resource
-    private ResultDetailRepository resultDetailRepository;
 
     /**
      * 添加一个习题
@@ -52,10 +48,7 @@ public class QuestionManageServiceImpl implements QuestionManageService {
      */
     @Override
     public List<Question> listAllQuestion() {
-        List<Question> questionList = questionRepository.listAll();
-        //处理习题关联的chapter展示问题
-        questionList.forEach(question -> question.getChapter().generateSubjectTitle());
-        return questionList;
+        return questionRepository.listAll();
     }
 
     /**
@@ -69,17 +62,7 @@ public class QuestionManageServiceImpl implements QuestionManageService {
         return fillQuestionList(questionList);
     }
 
-    /**
-     * 在指定章节中选题
-     *
-     * @param chapterIds
-     * @return
-     */
-    @Override
-    public List<Question> randomAssignQuestion(List<Long> chapterIds) {
-        List<Question> questionList = questionRepository.listByChapterIds(chapterIds);
-        return fillQuestionList(questionList);
-    }
+
 
     /**
      * 查询获取一个题目
@@ -89,33 +72,7 @@ public class QuestionManageServiceImpl implements QuestionManageService {
      */
     @Override
     public Question getOneQuestion(Long questionId) {
-        Question question = questionRepository.getOne(questionId);
-        //封装章节标题
-        question.getChapter().generateSubjectTitle();
-        return question;
-    }
-
-    /**
-     * 错题统计列表展示
-     * @param studentId
-     * @return
-     */
-    @Override
-    public List<QuestionWrongCountListVo> listWrongQuestionCount(Long studentId) {
-        List<QuestionWrongCountListVo> voList = new ArrayList<>();
-        //统计
-        List<QuestionCountDto> countList = resultDetailRepository.countWrongQuestionByStudentId(studentId);
-        //封装
-        countList.forEach(dto -> {
-            Question question = questionRepository.getOne(dto.getQuestionId());
-            QuestionWrongCountListVo vo = new QuestionWrongCountListVo();
-            vo.setQuestion(question);
-            question.getChapter().generateSubjectTitle();
-            vo.setChapter(question.getChapter());
-            vo.setCount(dto.getCount());
-            voList.add(vo);
-        });
-        return voList;
+        return questionRepository.getOne(questionId);
     }
 
     /**

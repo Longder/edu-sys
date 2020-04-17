@@ -11,13 +11,5 @@
         <result column="choice_B_" property="choiceB"/>
         <result column="choice_C_" property="choiceC"/>
         <result column="choice_D_" property="choiceD"/>
-        <association property="chapter" javaType="com.longder.edusys.entity.po.Chapter">
-            <id property="id" column="c_id"/>
-            <result column="subject_" property="subject"/>
-            <result column="name_" property="name"/>
-            <result column="title_" property="title"/>
-            <result column="c_content" property="content"/>
-            <result column="study_plan_" property="studyPlan"/>
-        </association>
     </resultMap>
 </mapper>

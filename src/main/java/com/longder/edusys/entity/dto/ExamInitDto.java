@@ -17,21 +17,6 @@ public class ExamInitDto implements Serializable {
      */
     private String name;
     /**
-     * 选题方式
-     */
-    private ChooseWay chooseWay;
-
-    /**
-     * 章节id集合
-     */
-    private List<Long> chapterIds;
-
-    /**
-     * 考试类型
-     */
-    private ExamType examType;
-
-    /**
      * 班级id
      */
     private Long classId;

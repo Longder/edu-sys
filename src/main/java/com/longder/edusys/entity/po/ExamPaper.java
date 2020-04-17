@@ -32,11 +32,6 @@ public class ExamPaper extends BaseIdEntity{
     private SysUser student;
 
     /**
-     * 考试类型
-     */
-    private ExamType examType;
-
-    /**
      * 创建时间
      */
     private LocalDateTime createTime;

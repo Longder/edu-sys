@@ -16,15 +16,6 @@
                                 <form id="add-question-form" method="post" class="form-horizontal" th:action="@{/admin/question/add}">
                                     <div class="hr-line-dashed"></div>
                                     <div class="form-group">
-                                        <label class="col-sm-2 control-label">所属学科-章节<span class="text-danger">*</span></label>
-                                        <div class="col-sm-10">
-                                            <select class="form-control" name="chapterId">
-                                                <option th:each="chapter:${chapterList}" th:value="${chapter.id}" th:text="${chapter.subjectTitle}"></option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="hr-line-dashed"></div>
-                                    <div class="form-group">
                                         <label class="col-sm-2 control-label">题目类型<span class="text-danger">*</span></label>
                                         <div class="col-sm-10">
                                             <select id="question-type-select" class="form-control" name="type">

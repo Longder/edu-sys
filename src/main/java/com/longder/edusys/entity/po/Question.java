@@ -26,17 +26,6 @@ public class Question extends BaseIdEntity{
      * 分数
      */
     private BigDecimal score;
-
-    /**
-     * 试题所属章节的id
-     */
-    private Long chapterId;
-
-    /**
-     * 所属章节
-     */
-    private Chapter chapter;
-
     /**
      * 答案
      */

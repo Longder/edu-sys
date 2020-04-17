@@ -41,25 +41,18 @@
                                 <p>分值：<span th:text="${detail.question.score}"></span></p>
                                 <div th:if="${detail.question.type.name =='CHOICE'}">
                                     <div class="radio radio-info">
-
-                                        <label th:for="'Q'+${detailStat.index}+'A'">A.<span th:text="${detail.question.choiceA}"></span></label>
+                                        A.<span th:text="${detail.question.choiceA}"></span>
                                     </div>
                                     <div class="radio radio-info">
-
-                                        <label th:for="'Q'+${detailStat.index}+'B'">B.<span th:text="${detail.question.choiceB}"></span></label>
+                                        B.<span th:text="${detail.question.choiceB}"></span>
                                     </div>
                                     <div class="radio radio-info">
-
-                                        <label th:for="'Q'+${detailStat.index}+'C'">C.<span th:text="${detail.question.choiceC}"></span></label>
+                                        C.<span th:text="${detail.question.choiceC}"></span>
                                     </div>
                                     <div class="radio radio-info">
-
-                                        <label th:for="'Q'+${detailStat.index}+'D'">D.<span th:text="${detail.question.choiceD}"></span></label>
+                                        D.<span th:text="${detail.question.choiceD}"></span>
                                     </div>
                                 </div>
-                                <p th:if="${detail.question.type.name == 'FILL'}">
-                                    <input readonly type="text" class="form-control"/>
-                                </p>
                                 <p>
                                     正确答案：<span th:text="${detail.question.answer}"></span>
                                 </p>

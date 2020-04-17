@@ -31,12 +31,7 @@ public class ExamManageController {
     public String initExam(ExamInitDto dto, Model model){
         ExamPaper examPaper = examManageService.generateExam(dto);
         model.addAttribute("exam",examPaper);
-        if(dto.getExamType() == ExamType.SELF){//自测
-            return "exam/exam-paper";
-        }else if(dto.getExamType() == ExamType.NORMAL){//正常
-            return "classExam/manage-list";
-        }
-        return "exam/exam-paper";
+        return "classExam/manage-list";
     }
 
     /**
@@ -45,13 +40,7 @@ public class ExamManageController {
      */
     @PostMapping("/complete")
     public String completeExam(ExamSubmitDto dto){
-
         examManageService.completeExam(dto);
-        if(dto.getExamType() == ExamType.SELF){
-            return "redirect:/admin/selfExam/list";
-        }else if(dto.getExamType() == ExamType.NORMAL){
-            return "redirect:/admin/classExam/result";
-        }
-        return "redirect:/admin/selfExam/list";
+        return "redirect:/admin/classExam/result";
     }
 }

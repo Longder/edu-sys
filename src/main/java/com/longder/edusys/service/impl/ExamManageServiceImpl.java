@@ -53,28 +53,11 @@ public class ExamManageServiceImpl implements ExamManageService {
     public ExamPaper generateExam(ExamInitDto examInitDto) {
         ExamPaper examPaper = new ExamPaper();
         examPaper.setCreateTime(LocalDateTime.now());
-        examPaper.setExamType(examInitDto.getExamType());
-        //判断考试类型
-        if (examInitDto.getExamType() == ExamType.SELF) {
-            examPaper.setName("自我测验");
-            //自我测验要记录当前用户的id和所属班级id
-            SysUser student = SecurityUtil.getCurrentUser();
-            examPaper.setStudent(student);
-            assert student != null;
-            examPaper.setGradeClass(student.getGradeClass());
-        } else if (examInitDto.getExamType() == ExamType.NORMAL) {
-            GradeClass gradeClass = gradeClassRepository.getOne(examInitDto.getClassId());
-            examPaper.setName(examInitDto.getName());
-            examPaper.setGradeClass(gradeClass);
-        }
-
-        List<Question> questionList = new ArrayList<>();
-        //判断选题方式，全随机还是指定章节
-        if (examInitDto.getChooseWay() == ChooseWay.ALL) {
-            questionList = questionManageService.randomAllQuestion();
-        } else if (examInitDto.getChooseWay() == ChooseWay.ASSIGN) {
-            questionList = questionManageService.randomAssignQuestion(examInitDto.getChapterIds());
-        }
+        GradeClass gradeClass = gradeClassRepository.getOne(examInitDto.getClassId());
+        examPaper.setName(examInitDto.getName());
+        examPaper.setGradeClass(gradeClass);
+        List<Question> questionList = questionManageService.randomAllQuestion();
+        //全随机题目
         //先存试卷
         examPaperRepository.insert(examPaper);
         //生成detail
@@ -128,12 +111,11 @@ public class ExamManageServiceImpl implements ExamManageService {
      * 区分自测考试还是正常考试
      *
      * @param studentId
-     * @param examType
      * @return
      */
     @Override
-    public List<ExamResult> listExamResultForStudent(Long studentId, ExamType examType) {
-        List<ExamResult> resultList = examResultRepository.listByStudentIdAndExamType(studentId,examType);
+    public List<ExamResult> listExamResultForStudent(Long studentId) {
+        List<ExamResult> resultList = examResultRepository.listByStudentId(studentId);
         //处理时间展示
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         resultList.forEach(examResult -> examResult.setCompleteTimeStr(formatter.format(examResult.getCompleteTime())));

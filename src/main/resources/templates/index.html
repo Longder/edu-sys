@@ -47,37 +47,10 @@
                     </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_ADMIN')">
-                    <a class="J_menuItem" th:href="@{/admin/chapter/list}" title="学科章节管理">
-                        <i class="fa fa-file-text-o"></i>
-                        <span class="nav-label">学科章节管理</span>
-                    </a>
-                </li>
-                <li sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="J_menuItem" th:href="@{/admin/question/list}" title="习题管理">
                         <i class="fa fa-clone"></i>
                         <span class="nav-label">习题管理</span>
                     </a>
-                </li>
-                <li sec:authorize="hasRole('ROLE_STUDENT')">
-                    <a class="J_menuItem" th:href="@{/admin/preLesson/listChapter}" title="章节预习">
-                        <i class="fa fa-feed"></i>
-                        <span class="nav-label">章节预习</span>
-                    </a>
-                </li>
-                <li sec:authorize="hasRole('ROLE_STUDENT')">
-                    <a href="#" title="自我测验">
-                        <i class="fa fa-book"></i>
-                        <span class="nav-label">自我测验</span>
-                        <span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li>
-                            <a class="J_menuItem" th:href="@{/admin/selfExam/choose}">开始自测</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" th:href="@{/admin/selfExam/list}" href="#">自测结果</a>
-                        </li>
-                    </ul>
                 </li>
                 <li sec:authorize="hasRole('ROLE_STUDENT')">
                     <a href="#" title="班级考试">
@@ -93,12 +66,6 @@
                             <a class="J_menuItem" th:href="@{/admin/classExam/result}" href="#">考试结果</a>
                         </li>
                     </ul>
-                </li>
-                <li sec:authorize="hasRole('ROLE_STUDENT')">
-                    <a class="J_menuItem" th:href="@{/admin/reviewLesson/wrongQuestion/list}" title="错题复习">
-                        <i class="fa fa-warning"></i>
-                        <span class="nav-label">错题复习</span>
-                    </a>
                 </li>
                 <li sec:authorize="hasRole('ROLE_TEACHER')">
                     <a class="J_menuItem" th:href="@{/admin/classExam/init}" title="发布考试">
@@ -125,7 +92,7 @@
                         <i class="fa fa-bars"></i> </a>
                     <form role="search" class="navbar-form-custom" method="post">
                         <div class="form-group">
-                            <h1>益智教育系统</h1>
+                            <h1>在线考试系统</h1>
                         </div>
                     </form>
                 </div>

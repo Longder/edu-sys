@@ -28,16 +28,15 @@ public interface ExamResultRepository {
     void updateScore(ExamResult examResult);
 
     /**
-     * 根据学生Id和考试类型查询
+     * 根据学生Id查询
      * @param studentId
-     * @param examType
      * @return
      */
     @ResultMap("com.longder.edusys.repository.ExamResultRepository.ExamResultResultMap")
     @Select("SELECT ER.id_,ER.exam_paper_id_, ER.student_id_,ER.score_,ER.complete_time_,EP.name_ as examPaperName  FROM EXAM_RESULT ER " +
             "    LEFT JOIN EXAM_PAPER EP on ER.exam_paper_id_ = EP.id_" +
-            "    WHERE ER.student_id_ = #{studentId} AND EP.exam_type_ = #{examType.name}")
-    List<ExamResult> listByStudentIdAndExamType(@Param("studentId") Long studentId, @Param("examType")ExamType examType);
+            "    WHERE ER.student_id_ = #{studentId}")
+    List<ExamResult> listByStudentId(@Param("studentId") Long studentId);
 
     /**
      * 获取一个考试结果

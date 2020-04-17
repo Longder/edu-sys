@@ -22,7 +22,7 @@ public interface ExamPaperRepository {
      * @param examPaper
      */
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    @Insert("INSERT INTO exam_paper(name_,grade_class_id_,exam_type_,student_id_,create_time_) VALUES(#{name},#{gradeClass.id},#{examType},#{student.id},#{createTime})")
+    @Insert("INSERT INTO exam_paper(name_,grade_class_id_,student_id_,create_time_) VALUES(#{name},#{gradeClass.id},#{student.id},#{createTime})")
     void insert(ExamPaper examPaper);
 
     /**
@@ -31,7 +31,7 @@ public interface ExamPaperRepository {
      * @return
      */
     @ResultMap("com.longder.edusys.repository.ExamPaperRepository.ExamPaperResultMap")
-    @Select("SELECT e.*,g.*,g.name_ as class_name FROM exam_paper e,grade_class g WHERE e.grade_class_id_ = g.id_ and e.grade_class_id_ = #{gradeClassId} and e.exam_type_ = 'NORMAL'")
+    @Select("SELECT e.*,g.*,g.name_ as class_name FROM exam_paper e,grade_class g WHERE e.grade_class_id_ = g.id_ and e.grade_class_id_ = #{gradeClassId}")
     List<ExamPaper> listNormalExamPaperByClassId(@Param("gradeClassId") Long gradeClassId);
 
     /**
